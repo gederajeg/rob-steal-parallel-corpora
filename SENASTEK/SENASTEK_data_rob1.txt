@@ -1,0 +1,136 @@
+CASES	LEFT	NODE	RIGHT	TRANSLATION	TRANSLATION_NODE	TRANSLATION_POS
+1	Because everybody else	robs	banks.	Karena orang lain merampas bank.	merampas	verb
+3	Mr. A always	robs	in disguise..	Mr. A selalu ngerampok dengan menyamar..	ngerampok	verb
+6	Don't confuse that with	robbing	, which means the removal of the barrow's contents.	Jangan bingung bahwa dengan merampok, yang berarti penghapusan dari isi barrow.	merampok	verb
+8	And you're accusing them of	robbing	?	Dan kalian menuduh mereka merampok?	merampok	verb
+10	Well, like	robbing	a bank?	Yah, seperti merampok bank?	merampok	verb
+11	But there's a bit fucking difference between hearing about a bank robbery and actually	robbing	a bank.	Tapi ada sedikit perbedaan antara mendengar tentang perampokan bank dan benar-benar merampok bank.	merampok	verb
+12	We're	robbing	a casino?	Kita akan merampok sebuah kasino?	merampok	verb
+13	Got sent to the rock for	robbing	a grocery store.	Dikirim untuk merampok sebuah toko kelontong.	merampok	verb
+14	Bad enough you got us	robbing	a military base, now we got to worry about all these motherfucking Rambos killing our asses.	Cukup buruk kau buat kita merampok pangkalan militer, sekarang kita harus khawatirkan semua Rambo itu membunuhi kita.	merampok	verb
+18	He was just	robbing	banks then.	Saat itu ia hanya merampok bank.	merampok	verb
+20	I think it's a miracle she's not	robbing	banks with the Symbionese Liberation Army.	Aku pikir adalah sebuah keajaiban dia tidak merampok Bank Dengan kelompok Symbionese Liberation Army.	merampok	verb
+23	And all I was doing was	robbing	Clem of whatever life she was gonna have left.	Dan yang aku lakukan adalah merampas Clem dari kehidupan apapun yang akan dia tinggalkan	merampas	verb
+25	Somebody's	robbing	from us?	Seseorang merampas uang kami?	merampas	verb
+26	He thinks the blockade is a figment of my imagination, and that I'm somehow deliberately	robbing	him of glory.	Dia pikir blokade adalah bagian dari imajinasi gue , dan bahwa gue entah bagaimana sengaja merampok kemuliaan .	merampok	verb
+29	Yo, I'm not	robbing	no banks with you guys, all right?	Yo, aku tak akan merampok bank bersama kalian, oke?	merampok	verb
+38	We	robbing	the bank.	Kami merampok bank.	merampok	verb
+47	"""- Are you"	robbing	us?	"""- Apakah Anda merampok kami?"	merampok	verb
+48	I want the guy who's	robbing	us.	Aku menginginkan orang yg merampok kami.	merampok	verb
+53	I got	robbed	, and you need to cancel the emergency credit card.	Saya dirampok , dan Anda perlu untuk membatalkan kartu kredit darurat .	dirampok	verb
+55	And the guy you	robbed	, I know told you he was.	Dan cowok yang dirampok, Aku tahu bilang dia.	dirampok	verb
+56	You could've	robbed	, stolen, cheated.. anything.	Kau bisa saja merampok, mencuri, mencurangi.. semuanya.	merampok	verb
+57	The bank's been	robbed	", the town is dry ""We'll die of thirst,"" the people cry"	"Bank dirampok, kota jadi kering ""Kami mati kehausan,"" jeritan warga"	dirampok	verb
+58	I got	robbed	!	Aku dicopet!	dicopet	verb
+60	All this happened because you were afraid you were gonna be	robbed	?	Jadi semua ini terjadi karena kau takut dirampok?	dirampok	verb
+62	What if we can rip off that train, and no one ever knows it got	robbed	?	Bagaimana jika kita bisa rampok kereta itu, dan tidak ada yang pernah tahu pernah dirampok?	dirampok	verb
+64	When did you get	robbed	?	"""- Kapan kau dirampok?"	dirampok	verb
+66	"""- I got"	robbed	.	/ Aku dirampok.	dirampok	verb
+71	Blagged,	robbed	.	Dipatil, Dirampok.	dirampok	verb
+72	"""- You think you'll get"	robbed	.	/ Kau panik. Kau mengira akan dirampok./ Siapa yang merampok?	dirampok	verb
+73	A bank has been	robbed	.	Bank telah dirampok.	dirampok	verb
+77	Well, if you must know, I was	robbed	.	Kalau kau mau tahu, aku dirampok.	dirampok	verb
+78	"""-I got"	robbed	.	"""- Aku dirampok."	dirampok	verb
+79	"""- The bank with your money was"	robbed	.	"""- Bank yang menyimpan uang mu dirampok."	dirampok	verb
+80	Half the folks I talked to don't even remember being	robbed	.	Setengah orang-orang yg ku tanyakan bahkan tidak ingat dirampok.	dirampok	verb
+82	Perhaps it is because I'm expecting to be	robbed	.	Karena aku berharap untuk dirampok.	dirampok	verb
+84	Wait one week. I got	robbed	.	Beri aku waktu seminggu, rumahku kemalingan.	kemalingan	verb
+85	I'm saying we were	robbed	.	Saya bilang kita dirampok.	dirampok	verb
+86	Yesterday Big Belly Burger got	robbed	.	Kemarin, Big Belly Burger dirampok.	dirampok	verb
+90	We kind of got	robbed	...	Kita baru saja dirampok ...	dirampok	verb
+92	"Listen to this. ""A pair of Mafia social clubs have been"	robbed	~	"Dengarkan ini. ""Sepasang Mafia klub sosial telah dirampok"	dirampok	verb
+93	The same hour that three elderly gentlemen	robbed	2.3 million dollars from the Williamsburg Savings Bank.	Saat yang sama bahwa tiga pria tua Mereka mencuri $ 2,3 juta Williamsburg Bank Tabungan.	mencuri	verb
+97	Two nights ago in Vegas, The Horsemen seemingly	robbed	a bank in Paris...	2 hari lalu di Vegas , Para Pesulap ini merampok bank di Paris...	merampok	verb
+98	Two years ago, he	robbed	a bank, popped a guard and the bank manager and walked out with two million in cash and bearer bonds.	dua tahun yang lalu, dia merampok bank, menyandra penjaga dan manager bank dan berjalan keluar dengan dua juta langsung dan surat obligasi.	merampok	verb
+99	You just	robbed	a bank!	Kau baru saja merampok bank!	merampok	verb
+103	Someone matching Cole's description just	robbed	a drugstore.	Ada yang mencocokkan deskripsi Cole yang baru saja merampok toko obat di Queens.	merampok	verb
+104	I	robbed	a gas station with a toy gun.	Aku merampok SPBU dengan pistol mainan.	merampok	verb
+105	They say he	robbed	a liquor store, but he didn't.	Mereka bilang dia merampok toko miras, tapi tidak.	merampok	verb
+106	We think he	robbed	a mail hack Tuesday down on the Poteau River.	Kami menduga dia merampok pengantar surat di Poteau River.	merampok	verb
+109	After doing time for robbery, before three years passed, he	robbed	again.	Setelah melakukan pencurian, sebelum tiga tahun berlalu, dia mencuri lagi.	mencuri	verb
+110	After they have	robbed	all the rich men, they will turn to the county government offices.	Setelah mereka merampok orang kaya, mereka akan beralih ke kantor-kantor pemerintah kabupaten .	merampok	verb
+112	My son	robbed	and killed Zeke, as you know.	Putraku merampok dan membunuh Zeke, kau tahu itu.	merampok	verb
+115	Well, all I know is there's a diner being	robbed	and your brother's in the thick of it.	aku tahu disana ada restoran ya dirampok. dan saudaramu ada didalamnya.	dirampok	verb
+120	You	robbed	her? We realized our mistake, and we returned her necklace.	Kau merampoknya? jadi kami sudah kembalikan kalungnya.	merampok	verb
+121	I'm being	robbed	here!	Aku dirampok disini!	dirampok	verb
+122	Look, instead he's dead, and someone	robbed	him of what's ours... much better.	Tapi dia mati dan ada yang merampok... benda milik kita, itu jauh lebih baik.	merampok	verb
+123	Rivals	robbed	his bank last year.	Saingannya mencuri uangnya tahun lalu.	mencuri	verb
+124	We	robbed	his banks and were hunted as outlaws.	{f: Verdana{s:24}{c:$FFFFFF}Mereka merampok Bank mereka, {f:	merampok	verb
+127	Exactly! I feel like I'm watching myself get	robbed	in broad daylight!	Aku merasa kerampokan di depan mataku sendiri di siang bolong!	kerampokan	verb
+133	You forget they	robbed	me of mine.	Kau lupa mereka mengambil pikiranku.	mengambil	verb
+134	Vronsky has	robbed	me of my cloak and I will give him my coat.	Vronsky telah merampas jubahku, Aku akan memberinya mantel.	merampas	verb
+137	"""- You"	robbed	me of my prime.	"""- Anda merampok saya."	merampok	verb
+142	That's two women who	robbed	me. Where is she?	Berarti dua wanita yang merampokku.	merampok	verb
+147	Emergency announcement: The 6 criminals who	robbed	nova bank were involved in a standoff with police and arrested. 2 were killed.	Pengumuman Darurat, 6 penjahat yang merampok Bank Nova terlibat dalam pertikaian dengan polisi dan ditangkap. 2 tewas.	merampok	verb
+151	We're like kids	robbed	of our own country.	Kita seperti anak-anak dirampok negara kita sendiri.	dirampok	verb
+152	Or because he just got	robbed	of two million dollars at gunpoint.	Atau karena ia baru saja dirampok dua juta dolar di bawah todongan senjata.	dirampok	verb
+156	Something Sonia Bern kept in the bank that was	robbed	over the weekend.	Sesuatu Sonia Bern disimpan di bank yang dirampok selama akhir pekan.	dirampok	verb
+157	Then you should've thought about that before you	robbed	people!	Seharusnya kau memikirkan itu sebelum kau merampok orang lain!	merampok	verb
+158	A jewelry factory was	robbed	Repeated rumors live shots	Sebuah pabrik perhiasan dirampok rumor berulang hidup tembakan	dirampok	verb
+159	Some coincidence, I mean, you asking to have your party here, and Hunt getting	robbed	right next door and by the same guy who rescued us at the warehouse.	Sungguh kebetulan, Maksudku, kau minta pestanya diadakan di sini. Dan Hunt dirampok tepat di seberang kita oleh orang yang sama yang menyelamatkan kita.	dirampok	verb
+162	Somebody done	robbed	that bank before we robbed it.	Ada orang yang merampok bank itu sebelum kami merampoknya.	merampok	verb
+167	"""- I"	robbed	the Bank of England.	"""- Aku yang mencuri Bank Inggris."	mencuri	verb
+170	I did get	robbed	the other day.	Aku juga hampir dirampok beberapa hari lalu.	dirampok	verb
+173	Fucking	robbed	the store for sixty some odd dollars.	Merampok toko demi 60 dolar.	merampok	verb
+174	She thought they had just	robbed	the store.	Dia kira mereka perampok toko itu.	perampok	noun
+176	They	robbed	the vault.	Mereka merampok lemari besi.	merampok	verb
+177	All I know is Briggs	robbed	the wrong store.	Yang kutahu adalah Briggs merampok toko yang salah.	merampok	verb
+178	He	robbed	them banks because he liked it.	Dia merampok bank karena dia menyukainya.	merampok	verb
+179	"""- You"	robbed	Tres Cruces?	Kau merampok Tres Cruces ?	merampok	verb
+181	During which time the Ex-Presidents... have	robbed	two more banks!	Selama itu Mantan Presiden... merampok dua bank lagi!	merampok	verb
+184	Once everyone knows that Jesse Pinkman drug lord, can be	robbed	with impunity.	"Sekali orang dengar ""Jesse Pinkman Dewa Drugs, bisa dirampok dengan leluasa."""	dirampok	verb
+187	I never	robbed	you!	Tapi aku tidak pernah merampokmu!	merampok	verb
+192	I'll tell you who	robbed	your bookies.	Akan kuberitahu siapa yang merampok rumah taruhan kalian.	merampok	verb
+195	And out of everyone you could have picked to	rob	, you pick me.	Dan dari ke semua orang itu, kau merampokku.	merampok	verb
+197	Now who here has a bank they would like us to	rob	?	Siapa pemilik bank di sini yang banknya ingin kami rampok?	rampok	verb
+198	Is there any more good places we can	rob	?	Apa ada tempat yang lebih baik kami dapat merampok?	merampok	verb
+199	Why did you	rob	? Tell me?	Kenapa kau merampok?	merampok	verb
+200	I saw you holding a gun and ready to	rob	.	Aku lihat kau pegang senjata dan sedia merampok.	merampok	verb
+202	Typical stop and	rob	.	Perampokan yang khas, berhenti dan merampok.	merampok	verb
+206	"""- You want to"	rob	'em?	Kau ingin merampok mereka?	merampok	verb
+208	If we got pistols, we can	rob	~	Jika adalah pistol masih bisa digunakan 'tuk merampok	merampok	verb
+211	Should we	rob	a bank or a supermarket? Bullshit.	Haruskah kita merampok bank atau supermarket?	merampok	verb
+214	"""Give a man a gun and he can"	rob	"a bank, but give a man a bank, and he can rob the world."""	"""Berikan seorang pria senjata maka ia bisa merampok sebuah bank, tapi memberikan seorang pria bank, maka dia bisa merampok seisi dunia."""	merampok	verb
+215	If you're gonna	rob	a bank, Frankie... You fucking go in, you empty the tills, then you run out, you fucking drive like fuck.	Jika kau merampok bank, Frankie... kau masuk kesana, kau kuras brankasnya, lalu kau melarikan diri dan menyetir seperti kesetanan.	merampok	verb
+216	If I'm going to	rob	a bank, I'm going to do it properly.	Jika saya akan merampok bank, Saya akan melakukannya dengan benar.	merampok	verb
+217	Holy crap, what, did you	rob	a bank?	Astaga, apa kau merampok bank?	merampok	verb
+218	What did you two,	rob	a bank?	Apa pekerjaan kalian, merampok bank?	merampok	verb
+220	Why would a brilliant structural engineer	rob	a bank?	Mengapa sarjana pembangunan yg pintar merampok bank?	merampok	verb
+224	"""I could"	rob	a bank.	"""Saya bisa merampok bank."	merampok	verb
+225	What I'd like to know is how you	rob	a bank... without opening any doors.	Yang aku ingin tahu bagaimana kamu bisa merampok bank... tanpa membuka pintu.	merampok	verb
+226	It's kind of fuck up to	rob	a blind guy, isn't it?	Kita mencuri di rumah orang buta?	mencuri	verb
+227	The truck, it was just used to	rob	a blood bank.	Truknya, Baru saja dipakai untuk mencuri di Bank Darah.	mencuri	verb
+229	I traveled all the way across the country to	rob	a goddamn charity?	Aku berjalan mengelilingi kota untuk merampok badan amal?	merampok	verb
+230	Don't	rob	a motherfucking bank without a motherfucking mask.	Jangan merampok bank, sialaan tanpa masker, sialan	merampok	verb
+233	Well, generally I	rob	balconies.	Nah, biasanya aku merampok balkon.	merampok	verb
+235	I don't	rob	banks.	Aku tidak merampok bank.	merampok	verb
+236	So you	rob	banks. That's impressive. What?	Jadi... .. Anda merampok bank.	merampok	verb
+238	I spent spent many years learning how to	rob	from magicians.	Aku menghabiskan bertahun-tahun belajar cara mencuri dari penyihir.	mencuri	verb
+240	"""- We"	rob	her advantage.	"""- Kami merampok keuntungan-nya."	merampok	verb
+242	Why don't we break into his home,	rob	"him, and murder him?"""	"Mengapa kita tidak masuk ke nya rumah, merampok dia, dan membunuhnya? """	merampok	verb
+244	He's afraid a thief will	rob	his house.	Dia adalah ketakutan satu pencuri akan merampok rumah nya.	merampok	verb
+247	They're all looking to	rob	me blind 24 hours a day.	Mereka mencoba merampok ku selama 24 jam dalam sehari.	merampok	verb
+248	You could	rob	me blind.	Kau bisa merampokku habis-habisan.	merampok	verb
+249	You are trying to	rob	me blind.	Kau mencoba merampokku?	merampok	verb
+250	So not only do they	rob	me of the Fields Medal, now they put me on the cover of Fortune magazine... with these hacks, these scholars of trivia.	Jadi tidak hanya mereka merampokku dari Bidang Medali, sekarang mereka menempatkanku pada sampul majalah Fortune... bersama para penulis sewaan ini, para sarjana yang sepele.	merampok	verb
+251	You can	rob	me you can starve me, you can beat me, and you can kill me just don't bore me.	Kau bisa merampokku membuatku lapar, memukulku, dan membunuhku tapi jangan membuatku bosan.	merampok	verb
+259	We don't	rob	people.	Kami tidak merampok orang.	merampok	verb
+260	We are gonna break into saint D's and	rob	Popper.	Mari kita istirahat di Santa D dan mencuri Popper,	mencuri	verb
+264	Close to El Paso is a town, Santa Cruz. Tomorrow Blackey, Chico, Paco... you, amigo will	rob	the bank in Santa Cruz.	Besok, Blackie, Chico, Paco... dan kau, kawan... akan merampok Bank di Santa Cruz.	merampok	verb
+265	I'll	rob	the bank with you.	Aku akan merampok bank denganmu.	merampok	verb
+266	Why don't you	rob	the bank?	Kenapa kau tak merampok Bank saja?	merampok	verb
+267	I said they didn't	rob	the bank.	Aku bilang mereka tidak merampok bank.	merampok	verb
+268	No one told you to go	rob	the blockbuster.	Tak ada yang menyuruhmu merampok blockbuster.	merampok	verb
+271	You're planning to	rob	the casino, Jack.	Kamu berencana merampok kasino ini, Jack.	merampok	verb
+273	Or I'll go down the street and	rob	the goddamned pharmacy.	Atau aku akan pergi ke jalanan dan merampok apotek.	merampok	verb
+275	General Eiling, why were you trying to	rob	the gold reserve?	Jendral Eiling, mengapa kau merampok Gold Reserve?	merampok	verb
+278	These guys are trying to	rob	the place.	Orang-orang berusaha untuk merampok tempat .	merampok	verb
+279	"""- Don't"	rob	the place. - Yeah.	Jangan rampok tempat itu./ Ya.	rampok	verb
+280	They proceed to the circus owner's trailer, where they	rob	the safe of its contents.	Mereka melanjutkan ke pemilik sirkus Trailer, di mana mereka merampok aman isinya.	merampok	verb
+288	Well, if you're not going to	rob	us, might as well do the name thing.	Jika kau tak akan merampok kami, mungkin kau bisa melakukan hal yang sama.	merampok	verb
+292	They don't have the balls to	rob	us.	Mereka tidak punya nyali untuk merampok kita.	merampok	verb
+294	They'll	rob	you in your sleep.	Mereka akan merampok mu disaat kau tidur.	merampok	verb
+295	And worse, the paralyzing vapor of her brother Alec who could	rob	you of sight, sound and touch.	Dan yang terburuk, kekuatan melumpuhkan Saudaranya, Alec..,.. Yang bisa merebut penglihatan, Pendengaran dan indera perabamu.	merebut	verb
+296	We're not here to	rob	you.	Kami di sini bukan untuk merampokmu..	merampok	verb
+297	"""I have loved you, I didn't"	rob	"you."""	Aku telah mencintaimu, aku tidak merampasmu.	merampas	verb
+300	We're here to	rob	your goddamn bank.	Kami di sini untuk merampok Anda sialan bank.	merampok	verb

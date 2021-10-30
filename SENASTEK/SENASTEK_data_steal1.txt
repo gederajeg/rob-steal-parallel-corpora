@@ -1,0 +1,140 @@
+CASES	LEFT	NODE	RIGHT	TRANSLATION	TRANSLATION_NODE	TRANSLATION_POS
+3	Did you report it	stolen	?	Apa kau melaporkan dicuri?	dicuri	verb
+4	I understand you spent time with Detective Blades looking for your car, which you reported	stolen	?	aku tahu kau sudah menghabiskan waktu bersama mencari mobil mu, yang kau laporkan dicuri?	dicuri	verb
+5	What exactly do you believe she has	stolen	?	Apa yang dia curi?	curi	verb
+10	My remote control has been	stolen	.	Remote control-ku telah dicuri.	dicuri	verb
+11	That was reported	stolen	.	Dilaporkan dicuri hari ini.	dicuri	verb
+12	No, I do not think there is something being	stolen	.	Tidak, saya tidak berpikir ada sesuatu yang dicuri.	dicuri	verb
+13	They'd take the jewellery they'd	stolen	.	Mereka akan mengambil perhiasan yang mereka telah curi...	curi	verb
+14	Painting is	stolen	.	Lukisan itu sudah dicuri.	dicuri	verb
+18	This is Louis Anglet... go to courier in the high-end	stolen	art market.	Ini Louis Anglet menjadi kurir dalam pasar benda-benda seni curian mahal.	curian	noun
+20	So, now... are you saying that a copy of the exam disappeared, but do not know which class it was, or... if it was	stolen	at the printing office?	Jadi, sekarang ... kau bilang bahwa salinan ujian menghilang, tapi tidak tahu yang mana kelas itu, atau ... Apa itu dicuri di kantor percetakan?	dicuri	verb
+24	We've been getting a lot of calls about	stolen	cop cars.	Kami mendapatkan banyak panggilan tentang mobil polisi yang dicuri.	dicuri	verb
+25	I would've	stolen	diamonds, laptop.	Aku sudah mencuri perhiasan, laptop.	mencuri	verb
+28	The skull was	stolen	from Akator in the 15th century.	Tengkorak itu dicuri dari Akator pada abad ke-15.	dicuri	verb
+29	And then it was	stolen	from me again!	Kemudian kau mencurinya juga dariku.	mencuri	verb
+31	Nothing	stolen	from the port.	Negatif! Tidak ada yang di curi di pelabuhan. Bingo!	dicuri	verb
+33	Well, you were most unlucky to have so many cumbersome objects	stolen	from you.	Kau yang paling beruntung untuk memiliki begitu banyak benda rumit dicuri dari Anda.	dicuri	verb
+35	If someone's using the market to sell	stolen	goods, that's of significant concern.	Maaf. Jika seseorang menggunakan pasar ini untuk menjual barang curian, itu menjadi perhatian yang signifikan.	curian	noun
+38	Everything I took for granted-	stolen	in a New York minute.	Semua yang saya menerima begitu saja - dicuri di New York menit.	dicuri	verb
+41	Now he could have	stolen	my records without ever seeing her.	Padahal dia bisa mencuri rekamanku tanpa harus menemuinya.	mencuri	verb
+43	You dare accuse our people of theft while you ride in on a	stolen	sand sailer?	Kau berani menuduh orang kami sebagai pencuri, tapi kalian menggunakan kapal curian?	curian	noun
+44	Heck, you had your set list	stolen	the day of the competition at Sectionals, and you pulled that one off, right?	Kalian kedapatan set list kalian dicuri dihari kompetisi saat Sectionals, dan kalian berhasil menang, iya kan?	dicuri	verb
+48	Yeah, I need to report a	stolen	vehicle.	Ya.Saya ingin melaporkan kendaran yang hilang.	hilang	verb
+49	And there was another keepsake of hers, but it got	stolen	with my stuff.	Dan ada kenang-kenangan dari dirinya lagi, tapi dicuri bersama dengan barang yang lain.	dicuri	verb
+50	It's the first thing I ever	stole	, actually.	Sebenarnya ini benda pertama yang kucuri.	curi	verb
+52	"""- Do you have proof that she"	stole	?	"""- Kau punya bukti dia mencuri?"	mencuri	verb
+56	The chemicals they	stole	"""--torinium and lydracide-- they have absolutely zero street value."	Bahan kimia yang mereka curi-- torinium dan lydracide-- keduanya sama sekali tak bernilai di jalanan sana.	curi	verb
+57	"What do you mean, """	stole	"""? Like, picked your pocket?"	"Apa maksudmu, ""mencuri"" seperti, mencopet dari sakumu?"	mencuri	verb
+59	And he	stole	$500 from me, back in the 1980s!	Dan dia mencuri $ 500 dariku..,.. Saat tahun 1980 !	mencuri	verb
+60	You	stole	a car, ran over a hillbilly, you got arrested, you got in a prison fight.	Anda mencuri mobil, menabrak sebuah dusun, Anda ditangkap, Anda masuk bertengkar penjara.	mencuri	verb
+62	I only	stole	a few coins.	Aku hanya mencuri beberapa koin.	mencuri	verb
+64	The other day, someone	stole	a radio...	Beberapa hari yang lalu, seseorang mencuri radio.	mencuri	verb
+65	He	stole	a truck when he was eleven years old.	Dia mencuri sebuah truk saat berusia 11 tahun.	mencuri	verb
+67	Does spyder know you and Lupe	stole	all the drugs?	Apakah spyder tau kau dan lupe mencuri semua obat?	mencuri	verb
+68	With the man who	stole	beckworth. - It is a complicated issue.	Dia ingin tahu mengapa aku sangat marah dengan orang yang mencuri Beckworth.	mencuri	verb
+74	I	stole	everything for us.	Aku mencuri apa saja untuk kita.	mencuri	verb
+75	You	stole	food from a wheelchair bound retarded boy.	Kau mencuri makanan dari anak terbelang yang berkursi roda.	mencuri	verb
+77	"""- Yes, I do. Tell me about it. Like the letter says, which I wrote in a moment of anger, they"	stole	from me, from my family.	Seperti kata suratnya, yang kutulis dalam kemarahan, mereka mencuri dariku, dari keluargaku.	mencuri	verb
+78	Where's the matchbox you	stole	from me?	Di mana korek api yang kau curi dariku?	curi	verb
+81	"""It was I who"	stole	"fruits, set fire to people's trousers... right?"""	Akulah yang mencuri buah, bakar celana orang, benar?	mencuri	verb
+83	"""- You"	stole	him from Scott Fischer.	"""- Kau menculiknya dari Scott Fischer."	menculik	verb
+86	I snuck into his truck and, uh,	stole	his sunflower seeds.	Aku masuk ke mobilnya dan, uh, mencuri biji bunga mataharinya.	mencuri	verb
+88	The last time we needed it, we, uh,	stole	it from a one-percenter.	Terakhir kali kami membutuhkannya, kami mencurinya dari seorang kaya.	mencuri	verb
+89	They	stole	it from the race track.	Mereka mencurinya dari tempat pacuan kuda.	mencuri	verb
+91	We, uh,	stole	it from these dumb-ass cops.	Kami, eh, mencuri dari ini bodoh-ass polisi.	mencuri	verb
+92	Vultan	stole	it while we were burying our dead.	Vultan mencurinya saat kami mengubur jenazah rekan kami.	mencuri	verb
+94	I shall take back the North from the thieves who	stole	it.	Aku akan merebut kembali Utara dari pencuri yang merampasnya.	merampas	verb
+96	"""- I thought he"	stole	it.	"""- Kukira dia mencurinya."	mencuri	verb
+97	Xiao	stole	it.What's our next step?	Xiao mencurinya. Apa langkah kita selanjutnya?	mencuri	verb
+99	I	stole	Lionel's Kryptonite key.	Aku mencuri kunci kryptonite-nya Lionel.	mencuri	verb
+102	Someone	stole	my car this morning.	Mobilku dicuri tadi pagi.	dicuri	verb
+104	They	stole	my copyright, and now there's a new edition, and guess what?	Mereka mencuri hak cipta, dan sekarang ada edisi baru, dan coba tebak?	mencuri	verb
+105	He disarmed me, held me at gunpoint then he	stole	my damn ride.	Dia melucutiku, menodongku dan mencuri kendaraanku.	mencuri	verb
+107	Until stagg	stole	my research.	Sampai Stagg mencuri penelitianku.	mencuri	verb
+112	I know you	stole	our routine.	Saya tahu kau mencuri rutinitas kami.	mencuri	verb
+113	She broke into my desk, and she	stole	our vacation money.	dan mencuri uang liburan kita.	mencuri	verb
+114	Dude, the fucking midgets just	stole	our women.	Teman, mereka mencuri wanita kami.	mencuri	verb
+115	You	stole	parts for your old cars.	Kakek juga dulu curi onderdil buat mobilnya.	curi	verb
+120	You	stole	that treasure from them!	Kau mencuri harta itu dari mereka!	mencuri	verb
+121	You	stole	the CIA's electromagnetic bullet shield.	Anda mencuri elektromagnetik perisai peluru CIA.	mencuri	verb
+124	Somebody had to tell you who	stole	the goods.	Seseorang harus memberitahu Anda yang mencuri barang.	mencuri	verb
+125	Two hours ago, unknown persons	stole	the hard drive from Deputy Director Rovick's home in Dupont Circle.	2 jam yang lalu, orang tak dikenal mencuri cakram keras... dari rumah Deputi Direktur Rovick di Dupont Circle.	mencuri	verb
+129	They ambushed Jin We and	stole	the sacred orb.	Mereka menyerang Jin We dan mencuri bola keramatnya.	mencuri	verb
+133	I can't believe you guys	stole	this from her house.	Aku tak percaya kalian Mengambil ini dari rumahnya.	mengambil	verb
+135	I	stole	this woman's body so that I could come see you.	Aku mencuri tubuh gadis ini untuk bertemu denganmu.	mencuri	verb
+136	Sorry I can't take you back to where I	stole	you for maintenance.	Maaf aku tak bisa mengembalikanmu Ke tempat aku mencurimu.	mencuri	verb
+137	And I think, he felt like I	stole	you from him.	Dan kupikir, dia merasa sepertinya aku mencuri kamu darinya.	mencuri	verb
+139	So I	stole	your files.	Jadi kucuri file-mu.	curi	verb
+140	Well, he	stole	your husband's ID and started impersonating him.	Dia mencuri identitas suamimu dan mulai meniru dia.	mencuri	verb
+143	That, and nobody	steals	beef barley soup.	Itu, dan tak seorangpun mau mencuri sup barley sapi.	mencuri	verb
+144	She	steals	clothes, identities--	Dia mencuri pakaian, identitas - b Apa sih yang terjadi di sini?	mencuri	verb
+146	He	steals	from gaming tables and steals a girl's heart	Dia mencuri dari meja judi dan mencuri hati para wanita	mencuri	verb
+149	He	steals	our phone chargers.	Dia mencuri pengisi baterai telepon kami.	mencuri	verb
+152	You're	stealing	?	Anda mencuri?	mencuri	verb
+153	Then why did he talk about	stealing	?	Lalu kenapa dia bicara tentang mencuri?	mencuri	verb
+158	I think she might be	stealing	.	Kupikir dia mungkin mencuri.	mencuri	verb
+159	Taking anything from my land would be considered	stealing	. And you don't want to steal from me, do you?	Menggali sesuatu di tanahku bisa disebut mencuri, dan kau tak ingin mencuri dariku, kan?	mencuri	verb
+161	You don't know the first thing about	stealing	' a car!	Kau tidak tahu apa-apa tentang cara mencuri mobil!	mencuri	verb
+164	"""- It's streaming right now. - They are planting a virus and"	stealing	a whole lot of data from your system at the same time.	Mereka menyebar virus dan sekaligus mencuri data dari sistemmu.	mencuri	verb
+168	Am I the only one who feels funny about	stealing	from a...?	Atau aku hanya merasa tak nyaman untuk mencuri dari seseorang...?	mencuri	verb
+174	Rohan is good at	stealing	hearts!	Rohan yang baik pada mencuri hati!	mencuri	verb
+175	Is Willie Bank know you're	stealing	his gold flatware, Neil?	Apa Willy Bank tahu kau curi sendok garpu emasnya, Neil?	curi	verb
+177	James - James Van Der Beek. What's up with Pacey	stealing	Joey away from you?	James, tepatnya, James Van Der Beek./ Kenapa Pacey mencuri Joey darimu?	mencuri	verb
+178	She and her father are responsible for	stealing	medicine from wounded Japanese soldiers and smuggling it to American prisoners of war.	Dia dan ayahnya Bertanggung jawab atas pencurian obat Dari tentara Jepang yang terluka	pencurian	noun
+180	I love that we live in a city where the police are more interested in catching you than the drug-	stealing	mobsters.	Aku suka hidup di kota di mana polisinya lebih tertarik menangkapmu dibandingkan pencuri obatnya.	pencuri	noun
+181	Right now yöu're	stealing	my dialogue.	Sekarang kau mencuri dialogku.	mencuri	verb
+182	Are you	stealing	secrets from MBI?	Kau mencuri rahasia MBI?	mencuri	verb
+184	Never did get you for	stealing	that money?	Kau tak pernah tertangkap mencuri uang itu?	mencuri	verb
+193	"""-"	stealing	up at his store.	"""- mencuri di tokonya."	mencuri	verb
+195	for	stealing	wood.	karena mencuri kayu.	mencuri	verb
+197	This is one big family, like sisters and brothers, because you have this close relationship, but it's not really close, like	stealing	your heart from your best friend.	Ini adalah salah satu keluarga besar, seperti saudara dan saudara-saudara, karena Anda telah hubungan sedekat ini, tapi bukan sangat dekat, seperti mencuri hati dari teman terbaik Anda.	mencuri	verb
+204	What did he	steal	?	Apa yang dia curi?	curi	verb
+206	I don't want to	steal	.	Aku tak mau mencuri.	mencuri	verb
+207	He thought if they were on his arms, he would have a copy that no one else could	steal	.	Dia pikir jika itu dirajahkan di kedua lengannya, itu artinya dia memiliki salinannya. sehingga tak ada seorang pun yang dapat mencurinya.	mencuri	verb
+209	We can't do anything but	steal	.	Kami tak bisa melakukan apapun selain mencuri.	mencuri	verb
+211	"""- It is always wrong to"	steal	.	"""- Pencurian adalah pencurian, dan selalu salah ."	pencurian	noun
+212	I sniff. I	steal	.	Aku menghisap kokain, mencuri, aku membunuh.	mencuri	verb
+214	Some folk say a nigger don't	steal	~	Ada yang bilang, Negro tak mencuri	mencuri	verb
+216	If you come perhaps we could both	steal	a boat, hmm?	Jika kau ikut mungkin kita bisa mencuri perahu.	mencuri	verb
+218	Any of you beauties know where I can	steal	a horse for a good cause?	Setiap dari Anda tahu di mana keindahan Aku bisa mencuri kuda untuk tujuan mulia?	mencuri	verb
+223	Did you manage to	steal	any firecrackers?	Kau berhasil mencuri petasan?	mencuri	verb
+224	They didn't	steal	anything else?	Mereka tidak mencuri apa-apa lagi? / Tidak.	mencuri	verb
+225	..Where you can't	steal	anything from us.	... di mana kau tidak bisa mencuri sesuatu dari kami.	mencuri	verb
+229	I know you're here to	steal	Chapple's money.	Aku tahu kalian disini ingin mencuri uang Chapple.	mencuri	verb
+231	I can't	steal	files from her boss's office right now.	Aku tidak bisa mencuri berkas dari kantor atasannya saat ini.	mencuri	verb
+233	They all flatter me and now it's difficult to find a target to	steal	from	Mereka semua menyanjung saya dan sekarang sulit untuk menemukan target untuk mencuri dari	mencuri	verb
+235	And technically she did	steal	hardware.	Dan secara teknis dia mencuri hardware.	mencuri	verb
+236	Do you	steal	her cell phone?	Kau mencuri ponselnya?	mencuri	verb
+237	Me and the boys take off, we break into your Mom's house, and we	steal	her computer.	Aku dan anak-anak pergi, kami menerobos masuk ke rumah ibumu, dan mencuri komputer dia.	mencuri	verb
+239	Your rivals tried to	steal	it and put out a clone.	Para pesaingmu sedang mencoba untuk mencurinya Dan menconteknya.	mencuri	verb
+240	We're gonna	steal	it back.	Kami akan mencurinya kembali.	mencuri	verb
+241	When the egg goes on display Monday morning you'll have 48 hours to	steal	it before your deadline's up.	Ketika telur itu dipamerkan Senin pagi kau punya waktu 48 jam untuk mencurinya sebelum tenggat waktumu habis.	mencuri	verb
+242	You want me to	steal	it for you.	Kau mau aku mencurinya?	mencuri	verb
+246	It was until Shadowspire tried to	steal	it.	Memang, sampai Shadowspire mencoba untuk mencurinya.	mencuri	verb
+253	How dare you try to	steal	my egg?	Beraninya kau mencoba mencuri telurku?	mencuri	verb
+255	Did you have to	steal	my nutcracker?	Apakah Kamu harus mencuri alat pemecah buah keras saya?	mencuri	verb
+256	Let the stealer	steal	"no more."""	"Hingga tak ada lagi yang harus dicuri oleh pencuri."""	dicuri	verb
+259	This camera doesn't just	steal	people's youth.	Kamera ini tidak hanya mencuri masa muda orang-orang.	mencuri	verb
+261	I was born to	steal	shit.	Aku sudah ditakdirkan mencuri semua itu.	mencuri	verb
+262	Watched him	steal	some guy's Frisbee.	Melihatnya mencuri Frisbee.	mencuri	verb
+264	I'm gonna go take a dump now. If anyone wanna	steal	something from this company,	Aku mau pulang sekarang, jika ada yang ingin mencuri sesuatu dari perusahaan ini,	mencuri	verb
+265	"""- No. Cady, you gotta"	steal	that book.	/ Tunggu, Cady, kau harus mencuri buku itu.	mencuri	verb
+266	So did Lane	steal	that crystal?	Jadi, apa benar Lane mencuri kristal itu?	mencuri	verb
+268	Told you I was gonna	steal	that one.	Sudah kubilang aku akan mencuri kutipan itu.	mencuri	verb
+271	Did my brother send you to	steal	the crown piece?	Apakah kakakku mengirim kamu untuk mencuri potongan mahkota?	mencuri	verb
+274	Two masked men came to	steal	the goods	Dua pria bertopeng datang mencuri barang	mencuri	verb
+275	"""- I break in, I"	steal	the jewels.	"""- Aku menerobos masuk, mencuri perhiasan itu"	mencuri	verb
+276	You are not going to	steal	the life of some innocent man.	Kau tak mungkin merenggut hidup orang tidak bersalah.	merenggut	verb
+279	They came to	steal	the rice	Mereka datang untuk mencuri beras	mencuri	verb
+281	How many should I tell him that he should say to	steal	the show.	Berapa banyak harus aku katakan padanya bahwa ia harus mengatakan untuk mencuri perhatian .	mencuri	verb
+282	He was probably trying to	steal	the TV.	Mungkin mau mencuri TV.	mencuri	verb
+283	The Fire Ferrets come from way behind and	steal	the win.	Fire Ferrets beranjak naik dan mencuri kemenangan!	mencuri	verb
+284	It is cookie for staff , and you rub frequently people beat them up and	steal	their money ..	Brutal untuk memulai. Orang-orang memukuli, mencuri uang mereka ..	mencuri	verb
+287	Otherwise they'll	steal	them themselves.	Kalau tidak mereka akan mencurinya sendiri.	mencuri	verb
+289	Did someone	steal	them?	Apakah seseorang mencuri mereka ?	mencuri	verb
+290	And you	steal	things.	Dan kau mencuri.	mencuri	verb
+291	I didn't	steal	this food.	Aku tidak mencuri makanannya	mencuri	verb
+294	Some bum's always trying to	steal	what's mine.	Beberapa gelandangan selalu berusaha untuk mencuri milikku.	mencuri	verb
+296	If you take one more step towards me... I'm going to	steal	you from Chan Young!	Jika kau melangkah selangkah lagi aku akan merebutmu dari Yoon Chan Young!	merebut	verb
+299	Anybody can go on your page and	steal	your photos to create a fake account.	Tiap orang bisa mengaku sebagai dirimu. dan mencuri fotomu, untuk membuat akun palsu.	mencuri	verb
