@@ -116,7 +116,7 @@ p1_idn <- rob1_verbal_lemma_equivalence %>%
         axis.title = element_text(size = 17))
 p1_idn
 ### uncomment the following code to save into file
-# ggsave("SENASTEK-plot-verbal-equivalence-rob-idn.png", plot = p1_idn, height = 5, width = 6, dpi = 300)
+# ggsave("SENASTEK/SENASTEK-plot-verbal-equivalence-rob-idn.png", plot = p1_idn, height = 5, width = 6, dpi = 300)
 
 
 
@@ -195,4 +195,4 @@ p2_idn <- steal1_verbal_lemma_equivalence %>%
         axis.title = element_text(size = 17))
 p2_idn
 ### uncomment the following code to save into file
-# ggsave("SENASTEK-plot-verbal-equivalence-steal-idn.png", plot = p2_idn, height = 5, width = 6, dpi = 300)
+# ggsave("SENASTEK/SENASTEK-plot-verbal-equivalence-steal-idn.png", plot = p2_idn, height = 5, width = 6, dpi = 300)
