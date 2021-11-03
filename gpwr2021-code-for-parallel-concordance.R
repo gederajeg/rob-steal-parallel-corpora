@@ -1,0 +1,94 @@
+library(tidyverse)
+
+conc_osub <- function(eng = "English source text", 
+                      idn = "Indonesian target text", 
+                      pattern = "Search pattern", 
+                      case_insensitive = FALSE, 
+                      conc_sample = 300, 
+                      filename = "parallel_conc.txt") {
+  
+  m_eng <- eng; rm(eng)
+  m_idn <- idn; rm(idn)
+  
+  search_term <- pattern
+  samples <- conc_sample
+  
+  message(paste("The output concordance file (called: '", filename,"') will be save in this directory: '", getwd(), "'\n", sep = ""))
+  
+  cat("LEFT\tNODE\tRIGHT\tTRANSLATION", file = filename, sep = "\n")
+  
+  for (i in seq_along(search_term)) {
+    
+    m_id <- stringr::str_which(m_eng, stringr::regex(search_term[i], ignore_case = case_insensitive))
+    
+    if ((length(m_id) >= 1) == TRUE) {
+      
+      m <- m_eng[m_id]
+      message("Detecting the match/pattern...\n")
+      m_loc <- stringr::str_locate_all(m, stringr::regex(search_term[i], ignore_case = case_insensitive))
+      m_loc <- purrr::map(m_loc, tibble::as_tibble)
+      m_loc <- purrr::map_df(m_loc, dplyr::bind_rows)
+      
+      # duplicate the number of subset text as many as the number of the match
+      m1 <- rep(m, stringr::str_count(m, stringr::regex(search_term[i], ignore_case = case_insensitive)))
+      m_id <- rep(m_id, stringr::str_count(m, stringr::regex(search_term[i], ignore_case = case_insensitive)))
+      
+      if (samples) {
+        
+        message(paste("You choose to generate ", samples, " random sample of the concordance lines.\n", sep = ""))
+        message(paste("Creating a ", samples, " random-sample of the concordance lines...\n", sep = ""))
+        
+        # sample count
+        sample_count <- sample(1:length(m1), samples)
+        
+        # retrieve random sample sentences
+        eng_sample <- m1[sample_count]
+        idn_sample <- m_idn[m_id[sample_count]]
+        m_loc1 <- m_loc[sample_count, ]
+        
+      } else {
+        
+        message("Retrieving all occurrences of the search pattern...\n")
+        
+        eng_sample <- m1
+        idn_sample <- m_idn[m_id]
+        m_loc1 <- m_loc
+        
+      }
+      
+      # extract match
+      message("Generating the concordance for the match/pattern...\n")
+      node <- stringr::str_sub(eng_sample, start = m_loc1$start, end = m_loc1$end)
+      node_tag <- stringr::str_c("\t<NODE>", node, "</NODE>\t", sep = "")
+      left <- stringr::str_sub(eng_sample, start = 1, end = (m_loc1$start - 1))
+      right <- stringr::str_sub(eng_sample, start = (m_loc1$end + 1), end = nchar(eng_sample))
+      
+      # create concordance
+      # LEFT <- stringr::str_sub(left, start = (nchar(left) - context_char), end = nchar(left))
+      LEFT <- replace(left, nchar(left) == 0, "~")
+      NODE <- node
+      # RIGHT <- stringr::str_sub(right, start = 1, end = context_char)
+      RIGHT <- replace(right, nchar(right) == 0, "~")
+      TRANSLATION <- idn_sample
+      concord_df <- tibble::tibble(LEFT, NODE, RIGHT, TRANSLATION)
+      concord_df <- dplyr::mutate(concord_df,
+                                  LEFT = stringr::str_trim(.data$LEFT),
+                                  NODE = stringr::str_trim(.data$NODE),
+                                  RIGHT = stringr::str_trim(.data$RIGHT))
+      concord_df <- dplyr::mutate(concord_df,
+                                  LEFT = stringr::str_replace(LEFT, "^-", '"-'),
+                                  RIGHT = stringr::str_replace(RIGHT, "^-", '"-'),
+                                  TRANSLATION = stringr::str_replace(TRANSLATION, "^-", '"-'))
+      
+      message(paste("Saving the output concordance file (called: '", filename,"') in '", getwd(), "'\n", sep = ""))
+      readr::write_tsv(dplyr::arrange(concord_df, dplyr::desc(NODE), RIGHT), filename, append = TRUE)
+      
+    } else {
+      
+      message("Sorry; no match found! Try another corpus/pattern!\n")
+      
+    }
+    
+  }
+  
+}
