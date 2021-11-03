@@ -35,7 +35,7 @@ conc_osub <- function(eng = "English source text",
       
       if (samples) {
         
-        message(paste("You choose to generate ", samples, " random sample of the concordance lines.\n", sep = ""))
+        message(paste("You choose to generate a ", samples, " random-sample of the concordance lines.\n", sep = ""))
         message(paste("Creating a ", samples, " random-sample of the concordance lines...\n", sep = ""))
         
         # sample count
