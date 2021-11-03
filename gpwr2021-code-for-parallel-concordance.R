@@ -1,5 +1,13 @@
+# load the tidyverse R package used in the conc_osub() function below
 library(tidyverse)
 
+# If you haven't installed the tidyverse, install it first in R by running this code: install.packages("tidyverse").
+# To learn more about what tidyverse is, go to its official webpage at https://www.tidyverse.org/
+
+# Main code below ====================
+
+# The following codes are for generating the parallel concordance from the English and Indonesian corpus texts in the OpenSubtitle corpus. 
+# The codes are wrapped into a function called `conc_osub()`
 conc_osub <- function(eng = "English source text", 
                       idn = "Indonesian target text", 
                       pattern = "Search pattern", 
