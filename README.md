@@ -24,4 +24,15 @@ License</a>.
 Kunjungi laman utama penelitian ini pada [tautan
 ini](https://udayananetworking.unud.ac.id/lecturer/research/880-gede-primahadi-wijaya-rajeg/a-model-for-translation-study-based-on-english-indonesian-translation-database-and-its-pedagogical-implication-1179).
 
-Info lebih lanjut akan ditambahkan kemudian…
+# Material
+
+-   Direktori
+    [SENASTEK](https://github.com/gederajeg/rob-steal-parallel-corpora/tree/main/SENASTEK)
+    berisi berkas pendukung untuk makalah yang disajikan pada [*Seminar
+    Nasional Sains, Teknologi dan
+    Humaniora*](https://senastek.unud.ac.id) 2021 (SENASTEK 2021).
+    Berkas-berkas tersebut berupa data mentah, [kode pemrograman
+    R](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-code.R)
+    untuk analisis kuantitatif dan visualisasi, dan grafik statistik.
+
+-   …
