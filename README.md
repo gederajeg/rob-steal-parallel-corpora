@@ -29,10 +29,10 @@ Jika berkas-berkas dalam repositori ini ([Rajeg et al.
 2021](#ref-rajeg_material_2021)) digunakan untuk tujuan penelitian dan
 pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
 
-> Rajeg, Gede Primahadi Wijaya, I. Made Rajeg, Putu Dea Indah Kartini &
-> I. Gede Semara Dharma Putra. 2021. Material pendukung untuk *MODEL
-> KAJIAN TERJEMAHAN BERBASIS BANK DATA TERJEMAHAN DIGITAL
-> INGGRIS-INDONESIA DAN IMPLIKASI PEDAGOGISNYA*. Open Science Framework.
+> Rajeg, Gede Primahadi Wijaya, I Made Rajeg, Putu Dea Indah Kartini & I
+> Gede Semara Dharma Putra. 2021. Material pendukung untuk *MODEL KAJIAN
+> TERJEMAHAN BERBASIS BANK DATA TERJEMAHAN DIGITAL INGGRIS-INDONESIA DAN
+> IMPLIKASI PEDAGOGISNYA*. Open Science Framework.
 > <https://doi.org/10.17605/OSF.IO/Y6ESA>. <https://osf.io/y6esa/>.
 
 # Material

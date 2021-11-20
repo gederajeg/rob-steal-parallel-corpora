@@ -1,7 +1,7 @@
 # if you find this code useful for your research and teaching,
 # please cite it via the repository as follow:
 
-# Rajeg, Gede Primahadi Wijaya, I. Made Rajeg, Putu Dea Indah Kartini & I. Gede Semara Dharma Putra. 2021. Material pendukung untuk MODEL KAJIAN TERJEMAHAN BERBASIS BANK DATA TERJEMAHAN DIGITAL INGGRIS-INDONESIA DAN IMPLIKASI PEDAGOGISNYA. Open Science Framework. https://doi.org/10.17605/OSF.IO/Y6ESA. https://osf.io/y6esa/.
+# Rajeg, Gede Primahadi Wijaya, I Made Rajeg, Putu Dea Indah Kartini & I Gede Semara Dharma Putra. 2021. Material pendukung untuk MODEL KAJIAN TERJEMAHAN BERBASIS BANK DATA TERJEMAHAN DIGITAL INGGRIS-INDONESIA DAN IMPLIKASI PEDAGOGISNYA. Open Science Framework. https://doi.org/10.17605/OSF.IO/Y6ESA. https://osf.io/y6esa/.
 
 # load the tidyverse R package used in the conc_osub() function below
 library(tidyverse)
