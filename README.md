@@ -22,11 +22,12 @@ berkas di dalam repositori ini berlisensi
 Commons Attribution-NonCommercial-ShareAlike 4.0 International
 License</a>.
 
-Kunjungi laman utama penelitian ini pada [tautan
-ini](https://udayananetworking.unud.ac.id/lecturer/research/880-gede-primahadi-wijaya-rajeg/a-model-for-translation-study-based-on-english-indonesian-translation-database-and-its-pedagogical-implication-1179).
+Kunjungi [laman
+utama](https://udayananetworking.unud.ac.id/lecturer/research/880-gede-primahadi-wijaya-rajeg/a-model-for-translation-study-based-on-english-indonesian-translation-database-and-its-pedagogical-implication-1179)
+penelitian ini.
 
 Jika berkas-berkas dalam repositori ini ([Rajeg et al.
-2021](#ref-rajeg_material_2021)) digunakan untuk tujuan penelitian dan
+2021b](#ref-rajeg_material_2021)) digunakan untuk tujuan penelitian dan
 pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
 
 > Rajeg, Gede Primahadi Wijaya, I Made Rajeg, Putu Dea Indah Kartini & I
@@ -44,7 +45,10 @@ pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
     Humaniora*](https://senastek.unud.ac.id) 2021 (SENASTEK 2021).
     Berkas-berkas tersebut berupa data mentah, [kode pemrograman
     R](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-code.R)
-    untuk analisis kuantitatif dan visualisasi, dan grafik statistik.
+    untuk analisis kuantitatif dan visualisasi,
+    [salindia](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-presentation_gpwr%20et%20al_2021.pdf)
+    ([Rajeg et al. 2021a](#ref-rajeg_pemanfaatan_2021)), dan grafik
+    statistik.
 
 -   Berkas
     [`gpwr2021-code-for-pre-processing-the-osub-tmx-file.R`](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/gpwr2021-code-for-pre-processing-the-osub-tmx-file.R)
@@ -55,7 +59,7 @@ pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
     padanan bahasa Indonesianya menjadi dua berkas teks biasa (`.txt`)
     terpisah.
 
--   
+-   … nantikan info lebih lanjut
 
 # Session info
 
@@ -71,7 +75,7 @@ devtools::session_info()
 #>  collate  en_US.UTF-8                 
 #>  ctype    en_US.UTF-8                 
 #>  tz       Asia/Makassar               
-#>  date     2021-11-20                  
+#>  date     2021-11-21                  
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
 #>  package     * version date       lib source        
@@ -132,10 +136,21 @@ Association (ELRA).
 
 </div>
 
+<div id="ref-rajeg_pemanfaatan_2021" class="csl-entry">
+
+Rajeg, Gede Primahadi Wijaya, I Made Rajeg, Putu Dea Indah Kartini & I
+Gede Semara Dharma Putra. 2021a. Pemanfaatan Bank-data Digital Dwibahasa
+dalam Kajian Terjemahan: Studi kasus padanan bahasa Indonesia untuk
+verba sinonim bahasa Inggris ROB & STEAL. Paper.
+doi:[10.17605/OSF.IO/Y6ESA](https://doi.org/10.17605/OSF.IO/Y6ESA).
+<https://github.com/gederajeg/rob-steal-parallel-corpora>.
+
+</div>
+
 <div id="ref-rajeg_material_2021" class="csl-entry">
 
 Rajeg, Gede Primahadi Wijaya, I Made Rajeg, Putu Dea Indah Kartini & I
-Gede Semara Dharma Putra. 2021. Material pendukung untuk *MODEL KAJIAN
+Gede Semara Dharma Putra. 2021b. Material pendukung untuk *MODEL KAJIAN
 TERJEMAHAN BERBASIS BANK DATA TERJEMAHAN DIGITAL INGGRIS-INDONESIA DAN
 IMPLIKASI PEDAGOGISNYA*. Open Science Framework.
 doi:[10.17605/OSF.IO/Y6ESA](https://doi.org/10.17605/OSF.IO/Y6ESA).

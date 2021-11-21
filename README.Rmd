@@ -20,7 +20,7 @@ Universitas Udayana, Bali, Indonesia
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> [![](https://img.shields.io/badge/doi-10.17605/OSF.IO/Y6ESA-green.svg)](https://doi.org/10.17605/OSF.IO/Y6ESA)<br />Semua berkas di dalam repositori ini berlisensi <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. 
 
-Kunjungi laman utama penelitian ini pada [tautan ini](https://udayananetworking.unud.ac.id/lecturer/research/880-gede-primahadi-wijaya-rajeg/a-model-for-translation-study-based-on-english-indonesian-translation-database-and-its-pedagogical-implication-1179).
+Kunjungi [laman utama](https://udayananetworking.unud.ac.id/lecturer/research/880-gede-primahadi-wijaya-rajeg/a-model-for-translation-study-based-on-english-indonesian-translation-database-and-its-pedagogical-implication-1179) penelitian ini.
 
 Jika berkas-berkas dalam repositori ini [@rajeg_material_2021] digunakan untuk tujuan penelitian dan pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
 
@@ -28,11 +28,11 @@ Jika berkas-berkas dalam repositori ini [@rajeg_material_2021] digunakan untuk t
 
 # Material
 
-- Direktori [SENASTEK](https://github.com/gederajeg/rob-steal-parallel-corpora/tree/main/SENASTEK) berisi berkas pendukung untuk makalah yang disajikan pada [*Seminar Nasional Sains, Teknologi dan Humaniora*](https://senastek.unud.ac.id) 2021 (SENASTEK 2021). Berkas-berkas tersebut berupa data mentah, [kode pemrograman R](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-code.R) untuk analisis kuantitatif dan visualisasi, dan grafik statistik.
+- Direktori [SENASTEK](https://github.com/gederajeg/rob-steal-parallel-corpora/tree/main/SENASTEK) berisi berkas pendukung untuk makalah yang disajikan pada [*Seminar Nasional Sains, Teknologi dan Humaniora*](https://senastek.unud.ac.id) 2021 (SENASTEK 2021). Berkas-berkas tersebut berupa data mentah, [kode pemrograman R](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-code.R) untuk analisis kuantitatif dan visualisasi, [salindia](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-presentation_gpwr%20et%20al_2021.pdf) [@rajeg_pemanfaatan_2021], dan grafik statistik.
 
 - Berkas [`gpwr2021-code-for-pre-processing-the-osub-tmx-file.R`](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/gpwr2021-code-for-pre-processing-the-osub-tmx-file.R) mengandung kode pemrograman untuk pengolahan awal korpus paralel Inggris-Indonesia *OpenSubtitles2018* [@lison_opensubtitles2016_2016] berformat `.tmx`. Pengolahan ini adalah untuk memisahkan kalimat bahasa Inggris dan padanan bahasa Indonesianya menjadi dua berkas teks biasa (`.txt`) terpisah.
 
-- 
+- ... nantikan info lebih lanjut
 
 # Session info
 
