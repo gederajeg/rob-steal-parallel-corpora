@@ -101,6 +101,7 @@ rob1_verbal_lemma_equivalence_chisq <- chisq.test(rob_verbal_equiv_vals)
 rob1_verbal_lemma_equivalence_chisq
 rob1_verbal_lemma_equivalence_chisq$p.value
 rob1_verbal_lemma_equivalence_chisq$residuals
+rob1_verbal_lemma_equivalence_expected <- rob1_verbal_lemma_equivalence_chisq$expected
 (rob1_verbal_pchisq_text <- pval_print(rob1_verbal_lemma_equivalence_chisq$p.value))
 
 ## visualising the barplot for lexical equivalence of ROB (Gambar 3a in the SENASTEK proceeding paper) =======
@@ -113,7 +114,10 @@ p1_idn <- rob1_verbal_lemma_equivalence %>%
   labs(x = "Padanan leksikal verba ROB",
        y = "Frekuensi kemunculan") +
   theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 17))
+        axis.title = element_text(size = 17)) +
+  geom_hline(yintercept = unique(rob1_verbal_lemma_equivalence_expected),
+             colour = brewer.pal(brewer.pal.info[rownames(brewer.pal.info) == "YlOrRd", 1], name = "YlOrRd")[6], linetype = "dashed") +
+  annotate(geom = "text", x = 4.5, y = unique(rob1_verbal_lemma_equivalence_expected) + 5, label = paste("frekuensi harapan (expected frequency) = ", prettyNum(round(unique(rob1_verbal_lemma_equivalence_expected), 2), decimal.mark = ","), sep = ""))
 p1_idn
 ### uncomment the following code to save into file
 # ggsave("SENASTEK/SENASTEK-plot-verbal-equivalence-rob-idn.png", plot = p1_idn, height = 5, width = 6, dpi = 300)
@@ -180,6 +184,7 @@ steal1_verbal_lemma_equivalence_chisq <- chisq.test(steal_verbal_equiv_vals)
 steal1_verbal_lemma_equivalence_chisq
 steal1_verbal_lemma_equivalence_chisq$p.value
 steal1_verbal_lemma_equivalence_chisq$residuals
+steal1_verbal_lemma_equivalence_expected <- steal1_verbal_lemma_equivalence_chisq$expected
 (steal1_verbal_pchisq_text <- pval_print(steal1_verbal_lemma_equivalence_chisq$p.value))
 
 ## visualising the barplot for lexical equivalence of STEAL (Gambar 3b in the SENASTEK proceeding paper) =======
@@ -192,7 +197,10 @@ p2_idn <- steal1_verbal_lemma_equivalence %>%
   labs(x = "Padanan leksikal verba STEAL",
        y = "Frekuensi kemunculan") +
   theme(axis.text = element_text(size = 12),
-        axis.title = element_text(size = 17))
+        axis.title = element_text(size = 17)) +
+  geom_hline(yintercept = unique(steal1_verbal_lemma_equivalence_expected),
+             colour = brewer.pal(brewer.pal.info[rownames(brewer.pal.info) == "YlOrRd", 1], name = "YlOrRd")[6], linetype = "dashed") +
+  annotate(geom = "text", x = 4.5, y = unique(steal1_verbal_lemma_equivalence_expected) + 5, label = paste("frekuensi harapan (expected frequency) = ", prettyNum(round(unique(steal1_verbal_lemma_equivalence_expected), 2), decimal.mark = ","), sep = ""))
 p2_idn
 ### uncomment the following code to save into file
 # ggsave("SENASTEK/SENASTEK-plot-verbal-equivalence-steal-idn.png", plot = p2_idn, height = 5, width = 6, dpi = 300)
