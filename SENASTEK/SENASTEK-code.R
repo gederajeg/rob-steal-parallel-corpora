@@ -104,6 +104,10 @@ rob1_verbal_lemma_equivalence_chisq$residuals
 rob1_verbal_lemma_equivalence_expected <- rob1_verbal_lemma_equivalence_chisq$expected
 (rob1_verbal_pchisq_text <- pval_print(rob1_verbal_lemma_equivalence_chisq$p.value))
 
+## Probability of the verbal equivalence ROB ======
+prop.table(rob_verbal_equiv_vals)
+prop.table(rob_verbal_equiv_vals) * 100
+
 ## visualising the barplot for lexical equivalence of ROB (Gambar 3a in the SENASTEK proceeding paper) =======
 p1_idn <- rob1_verbal_lemma_equivalence %>% 
   ggplot(aes(x = reorder(LEMMAS, -N_LEMMAS),
@@ -186,6 +190,10 @@ steal1_verbal_lemma_equivalence_chisq$p.value
 steal1_verbal_lemma_equivalence_chisq$residuals
 steal1_verbal_lemma_equivalence_expected <- steal1_verbal_lemma_equivalence_chisq$expected
 (steal1_verbal_pchisq_text <- pval_print(steal1_verbal_lemma_equivalence_chisq$p.value))
+
+## Probability of the verbal equivalence STEAL ======
+prop.table(steal_verbal_equiv_vals)
+prop.table(steal_verbal_equiv_vals) * 100
 
 ## visualising the barplot for lexical equivalence of STEAL (Gambar 3b in the SENASTEK proceeding paper) =======
 p2_idn <- steal1_verbal_lemma_equivalence %>% 
