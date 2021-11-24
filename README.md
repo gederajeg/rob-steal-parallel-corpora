@@ -46,9 +46,11 @@ pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
     Berkas-berkas tersebut berupa data mentah, [kode pemrograman
     R](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-code.R)
     untuk analisis kuantitatif dan visualisasi,
-    [salindia](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-presentation_gpwr%20et%20al_2021.pdf)
-    ([Rajeg et al. 2021a](#ref-rajeg_pemanfaatan_2021)), dan grafik
-    statistik.
+    [salindia/slides](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-presentation_gpwr%20et%20al_2021.pdf)
+    dan
+    [abstrak](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-abstrak.pdf)
+    presentasi ([Rajeg et al. 2021a](#ref-rajeg_pemanfaatan_2021)), dan
+    dua grafik statistik yang digunakan dalam presentasi.
 
 -   Berkas
     [`gpwr2021-code-for-pre-processing-the-osub-tmx-file.R`](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/gpwr2021-code-for-pre-processing-the-osub-tmx-file.R)
@@ -75,7 +77,7 @@ devtools::session_info()
 #>  collate  en_US.UTF-8                 
 #>  ctype    en_US.UTF-8                 
 #>  tz       Asia/Makassar               
-#>  date     2021-11-21                  
+#>  date     2021-11-24                  
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
 #>  package     * version date       lib source        
