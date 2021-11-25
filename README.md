@@ -46,8 +46,7 @@ pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
     Berkas-berkas tersebut berupa data mentah, [kode pemrograman
     R](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-code.R)
     untuk analisis kuantitatif dan visualisasi,
-    [salindia/slides](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-presentation_gpwr%20et%20al_2021.pdf)
-    dan
+    [salindia/slides](https://doi.org/10.6084/m9.figshare.17078369) dan
     [abstrak](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-abstrak.pdf)
     presentasi ([Rajeg et al. 2021a](#ref-rajeg_pemanfaatan_2021)), dan
     dua grafik statistik yang digunakan dalam presentasi.
@@ -77,7 +76,7 @@ devtools::session_info()
 #>  collate  en_US.UTF-8                 
 #>  ctype    en_US.UTF-8                 
 #>  tz       Asia/Makassar               
-#>  date     2021-11-24                  
+#>  date     2021-11-25                  
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
 #>  package     * version date       lib source        
@@ -144,7 +143,7 @@ Rajeg, Gede Primahadi Wijaya, I Made Rajeg, Putu Dea Indah Kartini & I
 Gede Semara Dharma Putra. 2021a. Pemanfaatan Bank-data Digital Dwibahasa
 dalam Kajian Terjemahan: Studi kasus padanan bahasa Indonesia untuk
 verba sinonim bahasa Inggris ROB & STEAL. Paper.
-doi:[10.17605/OSF.IO/Y6ESA](https://doi.org/10.17605/OSF.IO/Y6ESA).
+doi:[10.6084/m9.figshare.17078369](https://doi.org/10.6084/m9.figshare.17078369).
 <https://github.com/gederajeg/rob-steal-parallel-corpora>.
 
 </div>
