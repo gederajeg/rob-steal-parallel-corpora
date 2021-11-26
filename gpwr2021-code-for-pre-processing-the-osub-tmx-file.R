@@ -16,7 +16,7 @@ getwd()
 
 # load into R the Eng-Idn OpenSubtitles corpus in .tmx format
 tmx <- readr::read_lines(file = "~/Downloads/en-id-OpenSubtitles.tmx")
-# The code in line 13 above shows that I put the corpus file in my "Downloads" directory/folder.
+# The output of the `getwd()` function in line 13 above shows the corpus file is in my "Downloads" directory/folder.
 # Make sure you know where is the folder path/directory of this .tmx corpus in your computer.
 # Also note that the .tmx corpus of the OpenSubtitles is a large file (1-GB file).
 
