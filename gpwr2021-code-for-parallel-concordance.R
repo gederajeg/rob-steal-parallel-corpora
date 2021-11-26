@@ -26,7 +26,7 @@ conc_osub <- function(eng = "English source text",
   search_term <- pattern
   samples <- conc_sample
   
-  message(paste("The output concordance file (called: '", filename,"') will be save in this directory: '", getwd(), "'\n", sep = ""))
+  message(paste("The output concordance file (called: '", filename,"') will be saved in this directory: '", getwd(), "'\n", sep = ""))
   
   cat("LEFT\tNODE\tRIGHT\tTRANSLATION", file = filename, sep = "\n")
   
