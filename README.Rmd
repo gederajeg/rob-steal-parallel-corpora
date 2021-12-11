@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Universitas Udayana, Bali, Indonesia
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> [![](https://img.shields.io/badge/doi-10.17605/OSF.IO/Y6ESA-green.svg)](https://doi.org/10.17605/OSF.IO/Y6ESA)<br />Semua berkas di dalam repositori ini berlisensi <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> [![](https://img.shields.io/badge/doi-10.17605/OSF.IO/Y6ESA-lightblue.svg)](https://doi.org/10.17605/OSF.IO/Y6ESA)<br />Semua berkas di dalam repositori ini berlisensi <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. 
 
 Kunjungi [laman utama](https://udayananetworking.unud.ac.id/lecturer/research/880-gede-primahadi-wijaya-rajeg/a-model-for-translation-study-based-on-english-indonesian-translation-database-and-its-pedagogical-implication-1179) penelitian ini.
 
@@ -32,7 +32,23 @@ Jika berkas-berkas dalam repositori ini [@rajeg_material_2021] digunakan untuk t
 
 - Berkas [`gpwr2021-code-for-pre-processing-the-osub-tmx-file.R`](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/gpwr2021-code-for-pre-processing-the-osub-tmx-file.R) mengandung kode pemrograman untuk pengolahan awal korpus paralel Inggris-Indonesia *OpenSubtitles2018* [@lison_opensubtitles2016_2016] berformat `.tmx`. Pengolahan ini adalah untuk memisahkan kalimat bahasa Inggris dan padanan bahasa Indonesianya menjadi dua berkas teks biasa (`.txt`) terpisah, yang kemudian bisa menjadi input untuk konkordansi paralel (lihat info selanjutnya).
 
-- Program untuk menghasilkan konkordansi paralel menggunakan R dikemas dalam fungsi `para_conc()` yang diterbitkan bersama dengan modul pemrograman R bernama [**paracorp**](https://gederajeg.github.io/paracorp/) [@rajeg_paracorp_2021].
+- Program untuk menghasilkan konkordansi paralel menggunakan R dikemas dalam fungsi `para_conc()` yang diterbitkan bersama dengan modul pemrograman R bernama [**paracorp**](https://gederajeg.github.io/paracorp/) [@rajeg_paracorp_2021]. Perhatikan salah satu contoh penggunaan `para_conc()` berikut. Info lengkap cara memasang dan mengutip modul **paracorp** dalam publikasi dapat dilihat pada laman [**paracorp**](https://gederajeg.github.io/paracorp/).
+
+```{r contoh-paraconc}
+# load the paracorp R package
+# more info at https://gederajeg.github.io/paracorp/
+library(paracorp)  
+
+# in this example, the English text is used as the source text
+my_para_conc <- para_conc(source_text = sci_en,
+                          target_text = sci_id,
+                          pattern = "\\bshould\\b", # regular expression pattern
+                          conc_sample = 20) # retrieve 20 random concordance lines
+
+# peek into the results as tibble/data frame
+head(my_para_conc)
+```
+
 
 # Sesi ruang kerja R
 
