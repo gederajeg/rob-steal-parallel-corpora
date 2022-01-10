@@ -1,0 +1,834 @@
+---
+title: "R Notebook untuk analisis kuantitatif dalam laporan penelitian [*Model Kajian Terjemahan Berbasis Bank Data Terjemahan Digital Inggris-Indonesia dan Implikasi Pedagogisnya*](https://udayananetworking.unud.ac.id/lecturer/research/880-gede-primahadi-wijaya-rajeg/a-model-for-translation-study-based-on-english-indonesian-translation-database-and-its-pedagogical-implication-1179)"
+author: '[Gede Primahadi Wijaya Rajeg](https://udayananetworking.unud.ac.id/lecturer/880-gede-primahadi-wijaya-rajeg) <a itemprop="sameAs" content="https://orcid.org/0000-0002-2047-8621" href="https://orcid.org/0000-0002-2047-8621" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>, [I Made Rajeg](https://udayananetworking.unud.ac.id/lecturer/1817-i-made-rajeg) <a itemprop="sameAs" content="https://orcid.org/0000-0001-8989-0203" href="https://orcid.org/0000-0001-8989-0203" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>, I Gede Semara Dharma Putra, Putu Dea Indah Kartini'
+date: "Dibuat pada tanggal 25 Mei, 2021; Pembaharuan terakhir pada tanggal `r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_notebook:
+    fig_caption: yes
+    fig_width: 6
+    fig_retina: 2
+  bookdown::word_document2:
+    fig_caption: true
+    df_print: kable
+    fig_width: 6
+bibliography: "references.bib"
+link-citations: yes
+---
+
+<style type="text/css">
+  body{
+  font-size: 14pt;
+}
+</style>
+
+```{r setup, message = FALSE, warning = FALSE, include = FALSE}
+# global option chunck
+knitr::opts_chunk$set(fig.width = 7, 
+                      fig.asp = 0.618,
+                      fig.retina = 2,
+                      dpi = 300,
+                      dev = "png",
+                      echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+library(tidyverse)
+library(readxl)
+library(RColorBrewer)
+library(vcd)
+```
+
+```{r load-main-ROB-and-STEAL-data, message = FALSE, warning = FALSE, include = FALSE}
+rob <- readr::read_tsv("ROB_sample_conc_main.tsv")
+steal <- readr::read_tsv("STEAL_sample_conc_main.tsv")
+```
+
+# Rumusan Masalah 1
+
+- tipe padanan leksikal <span style="font-variant:small-caps;">rob</span> dan <span style="font-variant:small-caps;">steal</span> serta distribusi kemunculannya.
+
+# Rumusan Masalah 2
+
+- Kesepadanan konstruksional - penonjolan partisipan <span style="font-variant:small-caps;">rob</span> dan <span style="font-variant:small-caps;">steal</span> (lihat [\@ref(pembahasan-rq-2-eng)](#pembahasan-rq-2-eng)) dalam padanannya di bahasa Indonesia (lihat bagian [\@ref(pembahasan-rq-2-idn)](#pembahasan-rq-2-idn)).
+
+# Rumusan Masalah 3
+
+- Kesepadanan konstruksional - tipe konstruksi gramatikal <span style="font-variant:small-caps;">rob</span> dan <span style="font-variant:small-caps;">steal</span> dalam padanan bahasa Indonesianya. Perhatikan bagian [\@ref(pembahasan-rq-3)](#pembahasan-rq-3).
+
+## Analisis
+
+### Kode untuk ROB
+
+```{r profiled-participants-rob}
+rob_eng_profiled_participants <- rob %>% 
+  # verbal construction of ROB
+  filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL)$", negate = TRUE)) %>%
+  count(ROLE_ENG_THIEF) %>% 
+  rename(is_mentioned = ROLE_ENG_THIEF) %>% 
+  mutate(role = "thief") %>% 
+  bind_rows(rob %>% 
+              # verbal construction of ROB
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL)$", 
+                                                 negate = TRUE)) %>%
+              mutate(ROLE_ENG_TARGET = as.logical(ROLE_ENG_TARGET)) %>% 
+              count(ROLE_ENG_TARGET) %>% 
+              rename(is_mentioned = ROLE_ENG_TARGET) %>% 
+              mutate(role = "target")) %>% 
+  bind_rows(rob %>% 
+              # verbal construction of ROB
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL)$", 
+                                                 negate = TRUE)) %>% 
+              mutate(ROLE_ENG_GOODS = as.logical(ROLE_ENG_GOODS)) %>% 
+              count(ROLE_ENG_GOODS) %>% 
+              rename(is_mentioned = ROLE_ENG_GOODS) %>% 
+              mutate(role = "goods")) %>% 
+  mutate(role = factor(role, levels = c("thief", "target", "goods"))) %>% 
+  group_by(role) %>% 
+  arrange(role, desc(is_mentioned)) %>% 
+  mutate(perc_mention = round(n/sum(n) * 100, 2)) %>% 
+  ungroup()
+
+# binomial test of the profiled participant roles for ROB
+rob_eng_profiled_participants_binom <- rob_eng_profiled_participants %>% 
+  pivot_wider(-perc_mention, 
+              names_from = is_mentioned, 
+              values_from = n, 
+              values_fill = 0L) %>% 
+  mutate(n = `TRUE`+`FALSE`, 
+         pbin = map_dbl(pmap(list(x = `TRUE`, n = n), binom.test), "p.value"), 
+         pholm = p.adjust(pbin, method = "holm"),
+         signif = "ns", 
+         signif = if_else(pholm < 0.05, "*", signif), 
+         signif = if_else(pholm < 0.01, "**", signif), 
+         signif = if_else(pholm < 0.001, "***", signif),
+         lemma = "ROB")
+```
+
+```{r profiled-participants-rob-core-argument}
+rob_eng_profiled_participants_coreargs <- rob %>% 
+  # verbal construction of ROB
+  filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL)$", negate = TRUE)) %>% 
+  count(ROLE_ENG_THIEF, SYN_ENG_THIEF) %>% 
+  rename(is_mentioned = ROLE_ENG_THIEF,
+         syntax = SYN_ENG_THIEF) %>% 
+  mutate(role = "thief") %>% 
+  bind_rows(rob %>% 
+              # verbal construction of ROB
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL)$", 
+                                                 negate = TRUE)) %>% 
+              mutate(ROLE_ENG_TARGET = as.logical(ROLE_ENG_TARGET)) %>% 
+              count(ROLE_ENG_TARGET, SYN_ENG_TARGET) %>% 
+              rename(is_mentioned = ROLE_ENG_TARGET,
+                     syntax = SYN_ENG_TARGET) %>% 
+              mutate(role = "target")) %>% 
+  bind_rows(rob %>% 
+              # verbal construction of ROB
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL)$", 
+                                                 negate = TRUE)) %>% 
+              mutate(ROLE_ENG_GOODS = as.logical(ROLE_ENG_GOODS)) %>% 
+              count(ROLE_ENG_GOODS, SYN_ENG_GOODS) %>% 
+              rename(is_mentioned = ROLE_ENG_GOODS,
+                     syntax = SYN_ENG_GOODS) %>% 
+              mutate(role = "goods")) %>% 
+  mutate(role = factor(role, levels = c("thief", "target", "goods")))
+rob_eng_profiled_participants_coreargs <- rob_eng_profiled_participants_coreargs %>% 
+  mutate(core_args = TRUE,
+         core_args = if_else(is.na(syntax), NA, core_args),
+         core_args = if_else(str_detect(syntax, "passive_AGENT|possessive_determiner|PP_complement"), 
+                             FALSE, core_args)) %>% 
+  group_by(role, core_args) %>% 
+  mutate(n_coreargs_by_role = sum(n)) %>% 
+  group_by(role) %>% 
+  arrange(role, desc(n_coreargs_by_role))
+
+rob_eng_profiled_participants_coreargs_distinct <- rob_eng_profiled_participants_coreargs %>% 
+  select(role, core_args, n_coreargs_by_role) %>% 
+  distinct() %>% 
+  filter(!is.na(core_args))
+
+# binomial test of the core profiled participant roles for ROB
+rob_eng_profiled_participants_coreargs_binom <- rob_eng_profiled_participants_coreargs_distinct %>% 
+  pivot_wider(names_from = core_args, values_from = n_coreargs_by_role, values_fill = 0L) %>% 
+  mutate(n = `TRUE`+`FALSE`, 
+         pbin = map_dbl(pmap(list(x = `TRUE`, n = n), binom.test), "p.value"), 
+         pholm = p.adjust(pbin, method = "holm"),
+         signif = "ns", 
+         signif = if_else(pholm < 0.05, "*", signif), 
+         signif = if_else(pholm < 0.01, "**", signif), 
+         signif = if_else(pholm < 0.001, "***", signif),
+         lemma = "ROB")
+```
+
+### Kode untuk STEAL
+
+```{r profiled-participants-steal}
+steal_eng_profiled_participants <- steal %>% 
+  # verbal construction of STEAL
+  filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL|NP|_TRANS)$", negate = TRUE)) %>%
+  mutate(ROLE_ENG_THIEF = as.logical(ROLE_ENG_THIEF)) %>% 
+  count(ROLE_ENG_THIEF) %>% 
+  rename(is_mentioned = ROLE_ENG_THIEF) %>% 
+  mutate(role = "thief") %>% 
+  bind_rows(steal %>% 
+              # verbal construction of STEAL
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL|NP|_TRANS)$", 
+                                                 negate = TRUE)) %>% 
+              mutate(ROLE_ENG_TARGET = as.logical(ROLE_ENG_TARGET)) %>% 
+              count(ROLE_ENG_TARGET) %>% 
+              rename(is_mentioned = ROLE_ENG_TARGET) %>% 
+              mutate(role = "target")) %>% 
+  bind_rows(steal %>% 
+              # verbal construction of STEAL
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL|NP|_TRANS)$", 
+                                                 negate = TRUE)) %>% 
+              filter(!is.na(ROLE_ENG_GOODS)) %>% 
+              mutate(ROLE_ENG_GOODS = as.logical(ROLE_ENG_GOODS)) %>% 
+              count(ROLE_ENG_GOODS) %>% 
+              rename(is_mentioned = ROLE_ENG_GOODS) %>% 
+              mutate(role = "goods")) %>% 
+  mutate(role = factor(role, levels = c("thief", "target", "goods"))) %>% 
+  group_by(role) %>% 
+  arrange(role, desc(is_mentioned)) %>% 
+  mutate(perc_mention = round(n/sum(n) * 100, 2)) %>% 
+  ungroup()
+
+# binomial test of the profiled participant roles for STEAL
+steal_eng_profiled_participants_binom <- steal_eng_profiled_participants %>% 
+  pivot_wider(-perc_mention, names_from = is_mentioned, values_from = n, values_fill = 0L) %>% 
+  mutate(n = `TRUE`+`FALSE`, 
+         pbin = map_dbl(pmap(list(x = `TRUE`, n = n), binom.test), "p.value"), 
+         pholm = p.adjust(pbin, method = "holm"),
+         signif = "ns", 
+         signif = if_else(pholm < 0.05, "*", signif), 
+         signif = if_else(pholm < 0.01, "**", signif), 
+         signif = if_else(pholm < 0.001, "***", signif),
+         lemma = "STEAL")
+```
+
+```{r profiled-participants-steal-core-argument}
+steal_eng_profiled_participants_coreargs <- steal %>% 
+  # verbal construction of STEAL
+  filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL|NP|_TRANS)$", negate = TRUE)) %>%
+  count(ROLE_ENG_THIEF, SYN_ENG_THIEF) %>% 
+  rename(is_mentioned = ROLE_ENG_THIEF,
+         syntax = SYN_ENG_THIEF) %>% 
+  mutate(role = "thief",
+         is_mentioned = as.logical(is_mentioned)) %>% 
+  bind_rows(steal %>% 
+              # verbal construction of STEAL
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL|NP|_TRANS)$", 
+                                                 negate = TRUE)) %>% 
+              mutate(ROLE_ENG_TARGET = as.logical(ROLE_ENG_TARGET)) %>% 
+              count(ROLE_ENG_TARGET, SYN_ENG_TARGET) %>% 
+              rename(is_mentioned = ROLE_ENG_TARGET,
+                     syntax = SYN_ENG_TARGET) %>% 
+              mutate(role = "target")) %>% 
+  bind_rows(steal %>% 
+              # verbal construction of STEAL
+              filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL|NP|_TRANS)$", 
+                                                 negate = TRUE)) %>% 
+              mutate(ROLE_ENG_GOODS = as.logical(ROLE_ENG_GOODS)) %>% 
+              count(ROLE_ENG_GOODS, SYN_ENG_GOODS) %>% 
+              rename(is_mentioned = ROLE_ENG_GOODS,
+                     syntax = SYN_ENG_GOODS) %>% 
+              mutate(role = "goods")) %>% 
+  mutate(role = factor(role, levels = c("thief", "target", "goods")))
+steal_eng_profiled_participants_coreargs <- steal_eng_profiled_participants_coreargs %>% 
+  mutate(core_args = TRUE,
+         core_args = if_else(is.na(syntax), NA, core_args),
+         core_args = if_else(str_detect(syntax, "passive_AGENT|possessive|(?i)PP_complement"), 
+                             FALSE, core_args)) %>% 
+  group_by(role, core_args) %>% 
+  mutate(n_coreargs_by_role = sum(n)) %>% 
+  group_by(role) %>% 
+  arrange(role, desc(n_coreargs_by_role))
+
+steal_eng_profiled_participants_coreargs_distinct <- steal_eng_profiled_participants_coreargs %>% 
+  select(role, core_args, n_coreargs_by_role) %>% 
+  distinct() %>% 
+  filter(!is.na(core_args))
+
+
+# binomial test of the core profiled participant roles for STEAL
+steal_eng_profiled_participants_coreargs_binom <- steal_eng_profiled_participants_coreargs_distinct %>% 
+  pivot_wider(names_from = core_args, values_from = n_coreargs_by_role, values_fill = 0L) %>% 
+  mutate(n = `TRUE`+`FALSE`, 
+         pbin = map_dbl(pmap(list(x = `TRUE`, n = n), binom.test), "p.value"), 
+         pholm = p.adjust(pbin, method = "holm"),
+         signif = "ns", 
+         signif = if_else(pholm < 0.05, "*", signif), 
+         signif = if_else(pholm < 0.01, "**", signif), 
+         signif = if_else(pholm < 0.001, "***", signif),
+         lemma = "STEAL")
+```
+
+## Pembahasan 1 - Penonjolan partisipan pada data bahasa Inggris {#pembahasan-rq-2-eng}
+
+Rumusan masalah kedua berkaitan dengan kebertahanan penonjolan partisipan lema verbal ROB dan STEAL dalam padanan bahasa Indonesia. Mengikuti definisi yang diajukan oleh Stefanowitsch [-@stefanowitsch_cognitive_2011, 262], partisipan yang ditonjolkan adalah partisipan atau peran yang direalisasikan/disebutkan/muncul secara eksplisit dalam data kalimat penggunaan ROB dan STEAL. Perhatikan contoh berikut:
+
+(@realisasi_semua_partisipan_rob) contoh semua peran diungkapkan untuk ROB - Bahasa Inggris
+
+(@realisasi_semua_partisipan_steal) contoh semua peran diungkapkan untuk STEAL - Bahasa Inggris
+
+(@realisasi_sebagian_partisipan_rob) contoh sebagian peran diungkapkan untuk ROB - Bahasa Inggris
+
+(@realisasi_sebagian_partisipan_steal) contoh sebagian peran diungkapkan untuk ROB - Bahasa Inggris
+
+Contoh (@realisasi_semua_partisipan_rob) dan (@realisasi_semua_partisipan_steal) menunjukkan bahwa semua partisipan dari ROB dan STEAL diungkapkan secara eksplisit di dalam kalimat. Di sisi lain, contoh (@realisasi_sebagian_partisipan_rob) dan (@realisasi_sebagian_partisipan_steal) menunjukkan pemakaian ROB dan STEAL yang tidak mengungkapkan secara eksplisit semua peran partisipannya.
+
+Kajian awal sebelumnya oleh Stefanowitsch [-@stefanowitsch_cognitive_2011] telah menunjukkan bahwa partisipan yang dominan ditonjolkan oleh ROB adalah partisipan Target, sedangkan STEAL menonjolkan partisipan Barang. Penelitian kami, yang menggunakan sumber data yang berbeda (*subtitle*/terjemahan film yang dominan bersifat kasual), menemukan hasil yang sejalan dengan temuan Stefanowitsch [-@stefanowitsch_cognitive_2011]. [Gambar \@ref(fig:plot-profiled-participants-ENG-all-idn-lang)](#plot-profiled-participants-ENG-all-idn-lang) menunjukkan analisis kuantitatif penonjolan partisipan ROB dan STEAL dalam korpus terjemahan untuk penelitian ini. Informasi pada aksis vertikal adalah persentase dari munculnya/disebutkannya peran partisipan ROB dan STEAL di dalam kalimat; ketiga peran partisipan ROB dan STEAL ditunjukkan pada aksis horizontal; nilai di dalam diagram batang adalah frekuensi riil.
+
+
+```{r profiled-participants-ENG-all-chisq}
+eng_profiled_participants <- bind_rows(rob_eng_profiled_participants_binom,
+                                       steal_eng_profiled_participants_binom) %>% 
+  mutate(perc_mention = round((`TRUE`/n) * 100, 2))
+
+eng_profiled_participants_matrix <- eng_profiled_participants %>% 
+  select(role, lemma, `TRUE`) %>% 
+  pivot_wider(names_from = lemma, values_from = `TRUE`) %>% 
+  data.frame(row.names = 1) %>% 
+  as.matrix()
+names(attr(eng_profiled_participants_matrix, "dimnames")) <- c("Participant roles", "Lemmas")
+
+eng_profiled_participants_chisq <- chisq.test(eng_profiled_participants_matrix)
+eng_profiled_participants_effsizes <- vcd::assocstats(eng_profiled_participants_matrix)
+eng_profiled_participants_cramer <- round(eng_profiled_participants_effsizes$cramer, 3)
+```
+
+
+```{r plot-profiled-participants-ENG-all-idn-lang, fig.cap = "Distribusi peran partisipan verba ROB dan STEAL", fig.asp = 0.718}
+p1_idn <- eng_profiled_participants %>% 
+  ggplot(aes(x = role, y = perc_mention, fill = lemma)) +
+  geom_col(position = position_dodge(.9)) +
+  geom_text(aes(label = paste("N=", `TRUE`, sep = "")),
+            position = position_dodge(.9),
+            vjust = -.5) +
+  geom_text(aes(label = paste(perc_mention, "%", sep = "")),
+            position = position_dodge(.9),
+            vjust = 1.5,
+            col = c(rep("white", 3), rep("black", 3))) +
+  # group_by(role) %>% 
+  # mutate(perc = round(`TRUE`/sum(`TRUE`) * 100, 2)) %>% 
+  # ggplot(aes(x = role, y = perc, fill = lemma)) +
+  # geom_col() +
+  # geom_text(aes(label = `TRUE`),
+  #           position = position_stack(.5),
+  #           col = c(rep("white", 3), rep("black", 3))) +
+  theme_bw() +
+  labs(y = "Persentase",
+       x = "Partisipan",
+       fill = "Lema") +
+  theme(axis.text = element_text(size = 13),
+        axis.title = element_text(size = 15),
+        legend.text = element_text(size = 13),
+        legend.title = element_text(size = 15)) +
+  scale_fill_manual(values = brewer.pal(brewer.pal.info[rownames(brewer.pal.info) == "PiYG", 1], 
+                                        name = "PiYG")[c(2, 8)]) +
+  scale_x_discrete(labels = c("pencuri", "target", "barang"))
+
+p1_idn
+# ggsave("figs/plot-profiled-participants-idn.png", plot = p1_idn, height = 5, width = 6.5, dpi = 300)
+```
+
+Ketimpangan distribusi yang menarik untuk diperhatikan adalah realisasi peran Target dan Barang untuk ROB dan STEAL. Dari total `r unique(pull(filter(eng_profiled_participants, lemma == "ROB"), n))` sampel kalimat pemakaian verbal ROB, peran Target selalu (`r unique(pull(filter(eng_profiled_participants, lemma == "ROB", role == "target"), perc_mention))`%) direalisasikan secara eksplisit sedangkan hanya `r unique(pull(filter(eng_profiled_participants, lemma == "ROB", role == "goods"), perc_mention))`% dari total kalimat pemakaian ROB yang merealisasikan peran Barang secara eksplisit. Kecenderungan sebaliknya ditunjukkan oleh STEAL. Dari total `r unique(pull(filter(eng_profiled_participants, lemma == "STEAL"), n))` sampel kalimat pemakaian verbal STEAL, peran Target direalisasikan secara eksplisit sebanyak `r unique(pull(filter(eng_profiled_participants, lemma == "STEAL", role == "target"), perc_mention))`%, persentase yang jauh lebih rendah dari realisasi peran Barang untuk STEAL (`r unique(pull(filter(eng_profiled_participants, lemma == "STEAL", role == "goods"), perc_mention))`%). Ketimpangan distribusi realisasi partisipan ini sejalan dengan hasil dari Stefanowitsch (yang menggunakan data berbeda) dimana peran Target secara dominan lebih ditonjolkan oleh ROB dibandingkan STEAL, yang sebaliknya lebih menonjolkan peran Barang. Uji Statistik *Chi-Square* mengindikasikan bahwa ketimpangan distribusi realisasi peran partisipan ROB dan STEAL bukanlah suatu kebetulan (dengan kata lain, sangat signifikan secara statistik) (*X*^*2*^=`r round(eng_profiled_participants_chisq$statistic, 2)`; *df*=`r eng_profiled_participants_chisq$parameter`; *p*~two~~-~~tailed~=`r format(eng_profiled_participants_chisq$p.value, digits = 4)`) dengan nilai efek yang moderat (*Cramer's V*=`r eng_profiled_participants_cramer`) [lihat @levshina_how_2015, 209 untuk penjelasan tentang nilai efek]. Asosiasi antara peran partisipan dan kedua verba secara lebih intuitif ditunjukkan oleh Diagram Asosiasi pada [Gambar \@ref(fig:plot-profiled-participants-ENG-all-assocplot-notebook)](#plot-profiled-participants-ENG-all-assocplot-notebook).
+
+```{r plot-profiled-participants-ENG-all-assocplot-notebook, fig.asp = 0.818, fig.cap = "Association plot for the profiled participants of ROB and STEAL"}
+vcd::assoc(eng_profiled_participants_matrix, shade = TRUE, labeling_args = list(rot_labels = 0, set_varnames = c(Lemmas = "Lema", `Participant roles` = "Partisipan"), set_labels = list(`Participant roles` = c("pencuri", "target", "barang"))))
+```
+
+Batang persegi yang menjulang ke atas berwarna biru mengindikasikan asosiasi positif antara peran partisipan (baris) dan lema ROB dan STEAL; sebaliknya, batang persegi yang mengarah ke bawah berwarna marun mengindikasikan asosiasi negatif. Semakin gelap warna diagram batang, semakin kuat derajat asosiasi di antara kedua variabel. [Gambar \@ref(fig:plot-profiled-participants-ENG-all-assocplot-notebook)](#plot-profiled-participants-ENG-all-assocplot-notebook) menunjukkan asosiasi positif Target dengan ROB, dan Barang dengan STEAL. Dengan kata lain, peran Target merupakan partisipan menonjol untuk ROB, dan peran Barang untuk STEAL. Asosiasi negatif ditunjukkan oleh peran Target terhadap STEAL, dan peran Barang terhadap ROB. 
+
+Hasil ini sejalan dengan profil penonjolan partisipan yang diajukan dalam literatur [@goldberg_constructions_1995; @stefanowitsch_cognitive_2011], yaitu STEAL menonjolkan peran Target sebagai argumen wajib non-subjek (yaitu argumen objek), sedangkan ROB menonjolkan peran Barang sebagai argumen wajib non-subjek. Selanjutnya, kami mengulas tingkat kesepadanan dan kebertahanan penonjolan partisipan ROB dan STEAL dalam terjemahan bahasa Indonesianya.
+
+## Pembahasan 2 - Penonjolan partisipan pada data padanan ROB dan STEAL dalam bahasa Indonesia {#pembahasan-rq-2-idn}
+
+Pada bagian sebelumnya kita telah melihat partisipan yang dominan ditonjolkan secara sintaksis oleh ROB dan STEAL. Utamanya, kita membandingkan peran mana di antara TARGET dan BARANG yang dipetakan ke argumen inti objek oleh ROB dan STEAL dalam bahasa Inggris. [Gambar \@ref(fig:plot-profiled-participants-ENG-all-assocplot-notebook)](#plot-profiled-participants-ENG-all-assocplot-notebook) menunjukkan bahwa BARANG merupakan peran yang ditonjolkan oleh STEAL (yaitu, merupakan bagian dari argumen inti dari STEAL); sebaliknya, peran TARGET ditonjolkan sebagai argumen inti dari ROB.
+
+Bagian ini melihat derajat kesepadanan konstruksional ROB dan STEAL terkait penonjolan ketiga partisipan ini (Pencuri, Target, dan Barang). Penonjolan partisipan kali ini diukur dari frekuensi diungkapkannya secara eksplisit ketiga peran argumen/partisipan dari ROB dan STEAL dalam bahasa Inggris dan dalam padanan bahasa Indonesianya. Jadi, tingkat **kesepadanan konstruksional** untuk suatu peran argumen ditunjukkan juga dengan frekuensi diungkapkannya suatu peran dalam bahasa Inggris dan juga dalam padanan bahasa Indonesianya. Semakin tinggi frekuensi suatu peran disebutkan ataupun tidak disebutkan dalam bahasa Inggris dan juga padanan bahasa Indonesianya, maka semakin tinggi derajat kesepadanan konstruksional ROB dan STEAL terkait peran argumen tersebut. Perhatikan pembahasan contoh-contoh berikut:
+
+(@example1) [You]~TARGET~ stole [him]~GOODS~ from [Scott Fischer]~TARGET~ : [Kau]~TARGET~ menculik[nya]~GOODS~ dari [Scott Fischer]~TARGET~ (semua peran partisipan dari STEAL secara eksplisit diungkapkan dalam bahasa sumber dan bahasa target)
+(@example2) ...[I]~THIEF~'m somehow deliberately robbing [him]~TARGET~ of [glory]~GOODS~ : ...[gue]~THIEF~ entah bagaimana sengaja merampok [kemuliaan]~GOODS~ (peran TARGET tidak muncul secara eksplisit pada bahasa target)
+(@example3) [Somebody]~THIEF~'s robbing from [us]~TARGET~? : [Seseorang]~THIEF~ merampas [uang]~GOODS~ kami? (peran BARANG tidak muncul pada bahasa sumber)
+(@example4) [They]~THIEF~ came to steal [the rice]~GOODS~ : [Mereka]~THIEF~ datang untuk mencuri [beras]~GOODS~ (peran TARGET tidak muncul pada bahasa sumber dan bahasa target)
+
+Kesepadanan konstruksional bahasa sumber dan bahasa target dicerminkan oleh (@example1) dan (@example4) yang mana kemunculan dan ketidakmunculan suatu peran dalam bahasa sumber dipertahankan pada bahasa target. Ketidakmunculan peran TARGET pada (@example4) kemungkinan besar dimotivasi oleh status peran TARGET yang bukan merupakan partisipan menonjol untuk lema STEAL (perhatikan [Gambar \@ref(fig:plot-profiled-participants-ENG-all-idn-lang)](#plot-profiled-participants-ENG-all-idn-lang)). Selanjutnya akan dibahas satu per satu derajat kesepadanan konstruksional masing-masing peran pertisipan untuk ROB dan STEAL.
+
+```{r data-preparation}
+# only take the transitive verbal and gerundial usages of ROB and STEAL
+steal1 <- steal %>% 
+  filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL|NP|_TRANS)$", negate = TRUE)) %>% # verbal construction of ROB
+  mutate(across(matches("^ROLE_(ENG|IDN)_"), as.logical))
+
+rob1 <- rob %>% 
+  filter(!is.na(CXN_ENG), str_detect(CXN_ENG, "(INTR|NOMINAL)$", negate = TRUE)) %>% # verbal construction of ROB
+  mutate(across(matches("^ROLE_(ENG|IDN)_"), as.logical))
+```
+
+```{r cross-tabulation-and-signif-test-THIEF}
+rob_thief_profile_eng_idn <- rob1 %>% 
+  count(ROLE_ENG_THIEF, ROLE_IDN_THIEF) %>% 
+  mutate(across(where(is.logical), function(x) ifelse(x == FALSE, "THIEF_not_mentioned", "THIEF_mentioned"))) %>% 
+  rename(English = ROLE_ENG_THIEF,
+         Indonesian = ROLE_IDN_THIEF) %>% 
+  arrange(desc(n))
+rob_thief_profile_eng_idn_matrix <- rob_thief_profile_eng_idn %>% 
+  pivot_wider(names_from = Indonesian, values_from = n, values_fill = 0L) %>% 
+  column_to_rownames("English") %>% 
+  as.matrix()
+names(attr(rob_thief_profile_eng_idn_matrix, "dimnames")) <- c("English", "Indonesian")
+rob_thief_profile_eng_idn_fye <- fisher.test(rob_thief_profile_eng_idn_matrix)
+rob_thief_profile_eng_idn_effsize <- vcd::assocstats(rob_thief_profile_eng_idn_matrix)
+rob_thief_profile_eng_idn_phicoeff <- rob_thief_profile_eng_idn_effsize$phi
+
+steal_thief_profile_eng_idn <- steal1 %>% 
+  count(ROLE_ENG_THIEF, ROLE_IDN_THIEF) %>% 
+  mutate(across(where(is.logical), function(x) ifelse(x == FALSE, "THIEF_not_mentioned", "THIEF_mentioned"))) %>% 
+  rename(English = ROLE_ENG_THIEF,
+         Indonesian = ROLE_IDN_THIEF) %>% 
+  arrange(desc(n))
+steal_thief_profile_eng_idn_matrix <- steal_thief_profile_eng_idn %>% 
+  pivot_wider(names_from = Indonesian, values_from = n, values_fill = 0L) %>% 
+  column_to_rownames("English") %>% 
+  as.matrix()
+names(attr(steal_thief_profile_eng_idn_matrix, "dimnames")) <- c("English", "Indonesian")
+steal_thief_profile_eng_idn_fye <- fisher.test(steal_thief_profile_eng_idn_matrix)
+steal_thief_profile_eng_idn_effsize <- vcd::assocstats(steal_thief_profile_eng_idn_matrix)
+steal_thief_profile_eng_idn_phicoeff <- steal_thief_profile_eng_idn_effsize$phi
+```
+
+```{r cross-tabulation-and-signif-test-GOODS}
+rob_goods_profile_eng_idn <- rob1 %>% 
+  count(ROLE_ENG_GOODS, ROLE_IDN_GOODS) %>% 
+  mutate(across(where(is.logical), function(x) ifelse(x == FALSE, "GOODS_not_mentioned", "GOODS_mentioned"))) %>% 
+  rename(English = ROLE_ENG_GOODS,
+         Indonesian = ROLE_IDN_GOODS) %>% 
+  # arrange(desc(n))
+  arrange(English)
+rob_goods_profile_eng_idn_matrix <- rob_goods_profile_eng_idn %>% 
+  pivot_wider(names_from = Indonesian, values_from = n, values_fill = 0L) %>% 
+  column_to_rownames("English") %>% 
+  as.matrix()
+names(attr(rob_goods_profile_eng_idn_matrix, "dimnames")) <- c("English", "Indonesian")
+rob_goods_profile_eng_idn_fye <- fisher.test(rob_goods_profile_eng_idn_matrix)
+rob_goods_profile_eng_idn_effsize <- vcd::assocstats(rob_goods_profile_eng_idn_matrix)
+rob_goods_profile_eng_idn_phicoeff <- rob_goods_profile_eng_idn_effsize$phi
+
+steal_goods_profile_eng_idn <- steal1 %>% 
+  count(ROLE_ENG_GOODS, ROLE_IDN_GOODS) %>% 
+  mutate(across(where(is.logical), function(x) ifelse(x == FALSE, "GOODS_not_mentioned", "GOODS_mentioned"))) %>% 
+  rename(English = ROLE_ENG_GOODS,
+         Indonesian = ROLE_IDN_GOODS) %>% 
+  # arrange(desc(n))
+  arrange(English)
+steal_goods_profile_eng_idn_matrix <- steal_goods_profile_eng_idn %>% 
+  pivot_wider(names_from = Indonesian, values_from = n, values_fill = 0L) %>% 
+  column_to_rownames("English") %>%  
+  as.matrix()
+names(attr(steal_goods_profile_eng_idn_matrix, "dimnames")) <- c("English", "Indonesian")
+steal_goods_profile_eng_idn_fye <- fisher.test(steal_goods_profile_eng_idn_matrix)
+steal_goods_profile_eng_idn_effsize <- vcd::assocstats(steal_goods_profile_eng_idn_matrix)
+steal_goods_profile_eng_idn_phicoeff <- steal_goods_profile_eng_idn_effsize$phi
+```
+
+
+```{r cross-tabulation-and-signif-test-TARGETS}
+rob_target_profile_eng_idn <- rob1 %>%
+  count(ROLE_ENG_TARGET, ROLE_IDN_TARGET) %>%
+  mutate(across(where(is.logical), function(x) ifelse(x == FALSE, "TARGET_not_mentioned", "TARGET_mentioned"))) %>%
+  rename(English = ROLE_ENG_TARGET,
+         Indonesian = ROLE_IDN_TARGET) %>% 
+  arrange(desc(n))
+rob_target_profile_eng_idn_matrix <- rob_target_profile_eng_idn %>%
+  pivot_wider(names_from = Indonesian, values_from = n, values_fill = 0L) %>%
+  column_to_rownames("English") %>% 
+  data.frame() %>%
+  as.matrix()
+names(attr(rob_target_profile_eng_idn_matrix, "dimnames")) <- c("English", "Indonesian")
+
+# ROB's TARGET is always mentioned in English, but there are few cases where it is not mentioned in the translation. So there is only one variable of interest, namely (not-)mention of the Target in Indonesian, with two outcomes: mention vs. not mention of TARGET. This is the motivation to run the Exact Binomial Test
+rob_target_profile_eng_idn_binom <- binom.test(rob_target_profile_eng_idn_matrix)
+
+steal_target_profile_eng_idn <- steal1 %>% 
+  count(ROLE_ENG_TARGET, ROLE_IDN_TARGET) %>% 
+  mutate(across(where(is.logical), function(x) ifelse(x == FALSE, "TARGET_not_mentioned", "TARGET_mentioned"))) %>% 
+  rename(English = ROLE_ENG_TARGET,
+         Indonesian = ROLE_IDN_TARGET) %>% 
+  arrange(desc(n))
+steal_target_profile_eng_idn_matrix <- steal_target_profile_eng_idn %>% 
+  pivot_wider(names_from = Indonesian, values_from = n, values_fill = 0L) %>% 
+  column_to_rownames("English") %>%  
+  as.matrix()
+names(attr(steal_target_profile_eng_idn_matrix, "dimnames")) <- c("English", "Indonesian")
+steal_target_profile_eng_idn_fye <- fisher.test(steal_target_profile_eng_idn_matrix)
+steal_target_profile_eng_idn_effsize <- vcd::assocstats(steal_target_profile_eng_idn_matrix)
+steal_target_profile_eng_idn_phicoeff <- steal_target_profile_eng_idn_effsize$phi
+```
+
+### Derajat kesepadanan penonjolan partisipan: PENCURI
+
+[Gambar \@ref(fig:plot-profiled-participants-THIEF-ENG-IDN-ROB-STEAL-barplot-idn-lang)](#plot-profiled-participants-THIEF-ENG-IDN-ROB-STEAL-barplot-idn-lang) menampilkan distribusi ke(tidak)munculan/(tidak) disebutkannya peran Pencuri secara eksplisit untuk ROB (panel kiri) dan STEAL (panel kanan) pada bahasa sumber (aksis horizontal) dan bahasa target (warna isian diagram batang).
+
+```{r plot-profiled-participants-THIEF-ENG-IDN-ROB-STEAL-barplot-idn-lang, fig.cap = "Kesepadanan konstruksional ke(tidak)munculan peran PENCURI lema ROB dan STEAL", fig.asp=.75}
+rs_thief_profile_eng_idn <- rob_thief_profile_eng_idn %>% 
+  mutate(Lemma = "ROB",
+         English = factor(English, levels = unique(English)),
+         Indonesian = factor(Indonesian, levels = unique(Indonesian))) %>%
+  bind_rows(steal_thief_profile_eng_idn %>% 
+              mutate(Lemma = "STEAL",
+                     English = factor(English, levels = unique(English)),
+                     Indonesian = factor(Indonesian, levels = unique(Indonesian)))) %>% 
+  mutate(Lemma = factor(Lemma, levels = c("ROB", "STEAL"))) %>% 
+  group_by(Lemma, English) %>% 
+  mutate(perc = n / sum(n) * 100,
+         perc = round(perc, digits = 2))
+
+
+p2_thief_eng_idn <- rs_thief_profile_eng_idn %>% 
+  # ggplot(aes(x = English, y = perc, fill = Indonesian)) +
+  # geom_col() + 
+  # geom_text(aes(label = ifelse(rs_thief_profile_eng_idn$perc > 5, n, "")),
+  #           position = position_stack(vjust = 0.5)) +
+  ggplot(aes(x = English, y = n, fill = Indonesian)) +
+  geom_col(position = position_dodge(.9)) +
+  geom_text(aes(label = paste(perc, "% (", n, ")", sep = "")),
+            position = position_dodge(.9), vjust = -.5, size = 3.25) +
+  facet_wrap(~Lemma, scales = "free_x") +
+  theme_bw() +
+  scale_x_discrete(labels = c("PENCURI_muncul", "PENCURI_tidak_muncul")) +
+  scale_fill_manual(values = brewer.pal(11, "BrBG")[c(4, 8)],
+                    labels = c("PENCURI_muncul", "PENCURI_tidak_muncul"),
+                    name = "bahasa Indonesia") +
+  labs(y = "Frekuensi pengamatan",
+       # y = "Persentase",
+       caption = "Nilai di dalam kurung adalah nilai frekuensi pengamatan.",
+       x = "bahasa Inggris") +
+  theme(axis.text = element_text(size = 9),
+        axis.title = element_text(size = 15),
+        legend.title = element_text(size = 15),
+        legend.text = element_text(size = 9.75),
+        legend.position = "top",
+        plot.caption = element_text(size = 9))
+
+p2_thief_eng_idn
+
+# ggsave("figs/plot-profiled-participants-THIEF-all-verbs-idn.png", plot = p2_thief_eng_idn, height = 5, width = 7, dpi = 300)
+```
+
+Sebagai contoh untuk memahami informasi pada [Gambar \@ref(fig:plot-profiled-participants-THIEF-ENG-IDN-ROB-STEAL-barplot-idn-lang)](#plot-profiled-participants-THIEF-ENG-IDN-ROB-STEAL-barplot-idn-lang), perhatikan diagram batang pada panel ROB. Diagram batang pertama/paling kiri pada panel ROB (yaitu `PENCURI_muncul`) menunjukkan bahwa hanya terdapat proporsi yang sangat kecil (yaitu, `r pull(filter(rs_thief_profile_eng_idn, str_detect(English, 'F_mentioned$'), str_detect(Indonesian, "not_mentioned$"), Lemma == "ROB"), n)` dari total `r sum(pull(filter(rs_thief_profile_eng_idn, str_detect(English, 'F_mentioned$'), Lemma == "ROB"), n))` kasus) ketika peran Pencuri muncul/disebutkan pada bahasa sumber namun **tidak** muncul/**tidak** disebutkan pada bahasa target; dengan kata lain, `r pull(filter(rs_thief_profile_eng_idn, str_detect(English, 'F_mentioned$'), str_detect(Indonesian, "F_mentioned$"), Lemma == "ROB"), perc)`% kemunculan/disebutkannya peran Pencuri pada bahasa sumber dipertahankan pada bahasa target. Derajat yang sama ditunjukkan juga dari perspektif yang berbeda, yaitu ketika peran Pencuri tidak muncul/tidak disebutkkan (lihat diagram batang kedua pada panel ROB): `r pull(filter(rs_thief_profile_eng_idn, str_detect(English, 'not_mentioned$'), str_detect(Indonesian, "not_mentioned$"), Lemma == "ROB"), perc)`% dari total `r sum(pull(filter(rs_thief_profile_eng_idn, str_detect(English, 'not_mentioned$'), Lemma == "ROB"), n))` kasus tidak munculnya peran Pencuri pada bahasa sumber juga dipertahankan (yaitu tidak dimunculkan) pada bahasa target. Distribusi dipertahankannya ke(tidak)munculan eksplisit peran Pencuri untuk ROB pada BIng dan BI yang ditunjukkan [Gambar \@ref(fig:plot-profiled-participants-THIEF-ENG-IDN-ROB-STEAL-barplot-idn-lang)](#plot-profiled-participants-THIEF-ENG-IDN-ROB-STEAL-barplot-idn-lang) sangat signifikan secara statistik (*p*~Fisher~~-Exact~ `r if (rob_thief_profile_eng_idn_fye$p.value < 0.001) {"< 0.001"} else if (rob_thief_profile_eng_idn_fye$p.value < 0.01 & rob_thief_profile_eng_idn_fye$p.value > 0.001) {"< 0.01"} else if (rob_thief_profile_eng_idn_fye$p.value < 0.05 & rob_thief_profile_eng_idn_fye$p.value > 0.01) {"< 0.05"}`) dan efek distribusi tersebut sangat kuat ($\phi$ = `r round(rob_thief_profile_eng_idn_phicoeff, 2)`). Hasil statistik terhadap kedua perspektif tersebut menunjukkan tingginya derajat kesepadanan konstruksional peran Pencuri untuk ROB. Tren serupa ditunjukkan oleh data untuk lema STEAL (panel sebelah kanan). Terdapat derajat kesepadanan konstruksional yang tinggi, dan secara statistik sangat signifikan (*p*~Fisher~~-Exact~ `r if (steal_thief_profile_eng_idn_fye$p.value < 0.001) {"< 0.001"} else if (steal_thief_profile_eng_idn_fye$p.value < 0.01 & steal_thief_profile_eng_idn_fye$p.value > 0.001) {"< 0.01"} else if (steal_thief_profile_eng_idn_fye$p.value < 0.05 & steal_thief_profile_eng_idn_fye$p.value > 0.01) {"< 0.05"}`) serta berefek kuat ($\phi$ = `r round(steal_thief_profile_eng_idn_phicoeff, 2)`), untuk peran Pencuri dari bahasa sumber ke bahasa target, baik pada saat peran Pencuri muncul atau tidak muncul pada bahasa sumber.
+
+### Derajat kesepadanan penonjolan partisipan: BARANG
+
+[Gambar \@ref(fig:plot-profiled-participants-GOODS-ENG-IDN-ROB-STEAL-barplot-idn-lang)](#plot-profiled-participants-GOODS-ENG-IDN-ROB-STEAL-barplot-idn-lang) menampilkan distribusi ke(tidak)munculan/(tidak) disebutkannya peran Barang secara eksplisit untuk ROB (panel kiri) dan STEAL (panel kanan) pada bahasa sumber (aksis horizontal) dan bahasa target (warna isian diagram batang).
+
+```{r plot-profiled-participants-GOODS-ENG-IDN-ROB-STEAL-barplot-idn-lang, fig.cap = "Kesepadanan konstruksional ke(tidak)munculan peran BARANG lema ROB dan STEAL", fig.asp=.75}
+
+rs_goods_profile_eng_idn <- rob_goods_profile_eng_idn %>% 
+  mutate(Lemma = "ROB",
+         English = factor(English, levels = unique(English)),
+         Indonesian = factor(Indonesian, levels = unique(Indonesian))) %>%
+  bind_rows(steal_goods_profile_eng_idn %>% 
+              mutate(Lemma = "STEAL",
+                     English = factor(English, levels = unique(English)),
+                     Indonesian = factor(Indonesian, levels = unique(Indonesian)))) %>% 
+  mutate(Lemma = factor(Lemma, levels = c("ROB", "STEAL"))) %>% 
+  group_by(Lemma, English) %>% 
+  mutate(perc = n / sum(n) * 100,
+         perc = round(perc, digits = 2))
+
+p2_goods_eng_idn <- rs_goods_profile_eng_idn %>% 
+  # ggplot(aes(x = English, y = perc, fill = Indonesian)) +
+  # geom_col() + 
+  # geom_text(aes(label = ifelse(rs_goods_profile_eng_idn$perc > 10, n, "")),
+  #           position = position_stack(vjust = 0.5)) +
+  ggplot(aes(x = English, y = n, fill = Indonesian)) +
+  geom_col(position = position_dodge(.9)) +
+  geom_text(aes(label = paste(perc, "% (", n, ")", sep = "")),
+            position = position_dodge(.9), vjust = -.5, size = 3.25) +
+  facet_wrap(~Lemma, scales = "free_x") +
+  theme_bw() +
+  scale_x_discrete(labels = c("BARANG_muncul", "BARANG_tidak_muncul")) +
+  scale_fill_manual(values = brewer.pal(11, "BrBG")[c(8, 4)],
+                    labels = c("BARANG_tidak_muncul", "BARANG_muncul"),
+                    name = "bahasa Indonesia") +
+  labs(y = "Frekuensi pengamatan",
+       # y = "Persentase",
+       caption = "Nilai di dalam kurung adalah nilai frekuensi pengamatan.",
+       x = "bahasa Inggris") +
+  theme(axis.text = element_text(size = 9),
+        axis.title = element_text(size = 15),
+        legend.title = element_text(size = 15),
+        legend.text = element_text(size = 9.75),
+        legend.position = "top",
+        plot.caption = element_text(size = 9))
+p2_goods_eng_idn
+# ggsave("figs/plot-profiled-participants-GOODS-all-verbs-idn.png", plot = p2_goods_eng_idn, height = 5, width = 7, dpi = 300)
+```
+
+Secara statistik terdapat signifikansi yang tinggi dan kuat untuk derajat kesepadanan konstruksional penonjolan partisipan baik untuk ROB (*p*~Fisher~~-Exact~ `r if (rob_goods_profile_eng_idn_fye$p.value < 0.001) {"< 0.001"} else if (rob_goods_profile_eng_idn_fye$p.value < 0.01 & rob_goods_profile_eng_idn_fye$p.value > 0.001) {"< 0.01"} else if (rob_goods_profile_eng_idn_fye$p.value < 0.05 & rob_goods_profile_eng_idn_fye$p.value > 0.01) {"< 0.05"}`; $\phi$ = `r round(rob_goods_profile_eng_idn_phicoeff, 2)`) dan STEAL (*p*~Fisher~~-Exact~ `r if (steal_goods_profile_eng_idn_fye$p.value < 0.001) {"< 0.001"} else if (steal_goods_profile_eng_idn_fye$p.value < 0.01 & steal_goods_profile_eng_idn_fye$p.value > 0.001) {"< 0.01"} else if (steal_goods_profile_eng_idn_fye$p.value < 0.05 & steal_goods_profile_eng_idn_fye$p.value > 0.01) {"< 0.05"}`; $\phi$ = `r round(steal_goods_profile_eng_idn_phicoeff, 2)`), utamanya dari dua perspektif berbeda. Untuk ROB, terdapat dominasi di mana peran Barang tidak muncul/tidak disebutkan pada bahasa sumber (diagram batang sebelah kanan pada panel ROB, yaitu `BARANG_tidak_muncul`); dominasi ini dapat dipengaruhi oleh profil partisipan ROB yang tidak menonjolkan peran Barang, tapi Target (perhatikan [Gambar \@ref(fig:plot-profiled-participants-ENG-all-idn-lang)](#plot-profiled-participants-ENG-all-idn-lang)). Dari total `r sum(pull(filter(rs_goods_profile_eng_idn, Lemma=="ROB", English=="GOODS_not_mentioned"), n))` ketidakmunculan Barang untuk ROB pada bahasa sumber, sebanyak `r pull(filter(rs_goods_profile_eng_idn, Lemma=="ROB", English=="GOODS_not_mentioned", perc==max(perc)), perc)`% kasus terjemahannya dalam bahasa target mempertahankan ketidakmunculan peran Barang tersebut. Selanjutnya, dari total `r sum(pull(filter(rs_goods_profile_eng_idn, Lemma=="ROB", English=="GOODS_mentioned"), n))` kemunculan/disebutkannya peran Barang dalam bahasa sumber (diagram batang sebelah kiri/pertama pada panel ROB), `r pull(filter(rs_goods_profile_eng_idn, Lemma=="ROB", English=="GOODS_mentioned", perc==max(perc)), perc)`% terjemahannya dalam bahasa target mempertahankan kemunculan/disebutkannya peran Barang tersebut.
+
+Sebaliknya, dari perspektif yang berbeda, STEAL menunjukkan dominasi kemunculan/disebutkannya peran Barang (diagram batang sebelah kiri/pertama pada panel STEAL, yaitu `BARANG_muncul`); dominasi ini juga terkait dengan profil partisipan STEAL yang menonjolkan peran Barang (perhatikan [Gambar \@ref(fig:plot-profiled-participants-ENG-all-idn-lang)](#plot-profiled-participants-ENG-all-idn-lang)). Dari total `r sum(pull(filter(rs_goods_profile_eng_idn, Lemma=="STEAL", English=="GOODS_mentioned"), n))` kemunculan/disebutkannya peran Barang, `r pull(filter(rs_goods_profile_eng_idn, Lemma=="STEAL", English=="GOODS_mentioned", perc==max(perc)), perc)`% terjemahannya dalam bahasa target mempertahankan kemunculan/disebutkannya peran Barang tersebut, mengindikasikan tingginya derajat kesepadanan konstruksional STEAL terkait penonjolan partisipan Barang.
+
+### Derajat kesepadanan penonjolan partisipan: TARGET
+
+[Gambar \@ref(fig:plot-profiled-participants-TARGET-ENG-IDN-ROB-STEAL-barplot-idn-lang)](#plot-profiled-participants-TARGET-ENG-IDN-ROB-STEAL-barplot-idn-lang) menampilkan distribusi ke(tidak)munculan/(tidak) disebutkannya peran Barang secara eksplisit untuk ROB (panel kiri) dan STEAL (panel kanan) pada bahasa sumber (aksis horizontal) dan bahasa target (warna isian diagram batang).
+
+```{r plot-profiled-participants-TARGET-ENG-IDN-ROB-STEAL-barplot-idn-lang, fig.cap = "Kesepadanan konstruksional ke(tidak)munculan peran TARGET lema ROB dan STEAL", fig.asp=.75}
+rs_target_profile_eng_idn <- rob_target_profile_eng_idn %>% 
+  mutate(Lemma = "ROB",
+         English = factor(English, levels = unique(English)),
+         Indonesian = factor(Indonesian, levels = unique(Indonesian))) %>%
+  bind_rows(steal_target_profile_eng_idn %>% 
+              mutate(Lemma = "STEAL",
+                     English = factor(English, levels = unique(English)),
+                     Indonesian = factor(Indonesian, levels = unique(Indonesian)))) %>% 
+  mutate(Lemma = factor(Lemma, levels = c("ROB", "STEAL"))) %>% 
+  group_by(Lemma, English) %>% 
+  mutate(perc = n / sum(n) * 100,
+         perc = round(perc, digits = 2))
+
+
+p2_target_eng_idn <- rs_target_profile_eng_idn %>% 
+  # ggplot(aes(x = English, y = perc, fill = Indonesian)) +
+  # geom_col() + 
+  # geom_text(aes(label = ifelse(rs_target_profile_eng_idn$perc > 10, n, "")),
+  #           position = position_stack(vjust = 0.5)) +
+  ggplot(aes(x = English, y = n, fill = Indonesian)) +
+  geom_col(position = position_dodge(.9)) +
+  geom_text(aes(label = paste(perc, "% (", n, ")", sep = "")),
+            position = position_dodge(.9), vjust = -.5, size = 3.25) +
+  facet_wrap(~Lemma, scales = "free_x") +
+  theme_bw() +
+  scale_x_discrete(labels = c("TARGET_muncul", "TARGET_tidak_muncul")) +
+  scale_fill_manual(values = brewer.pal(11, "BrBG")[c(4, 8)],
+                    labels = c("TARGET_muncul", "TARGET_tidak_muncul"),
+                    name = "bahasa Indonesia") +
+  labs(y = "Frekuensi pengamatan",
+       # y = "Persentase",
+       caption = "Nilai di dalam kurung adalah nilai frekuensi pengamatan.",
+       x = "bahasa Inggris") +
+  theme(axis.text = element_text(size = 9.5),
+        axis.title = element_text(size = 15),
+        legend.title = element_text(size = 15),
+        legend.text = element_text(size = 9.5),
+        legend.position = "top",
+        plot.caption = element_text(size = 9))
+p2_target_eng_idn
+
+# ggsave("figs/plot-profiled-participants-TARGET-all-verbs-idn.png", plot = p2_target_eng_idn, height = 5, width = 7, dpi = 300)
+```
+
+Kesepadanan konstruksional peran Target untuk kedua lema verbal ROB dan STEAL juga dapat dikatakan tinggi. Perhatikan panel ROB di sebelah kiri. Peran Target untuk ROB selalu muncul pada bahasa sumber dan `r pull(filter(rs_target_profile_eng_idn, English == "TARGET_mentioned", Lemma == "ROB", Indonesian == "TARGET_mentioned"), perc)`% dari kemunculan Target pada bahasa sumber dipertahankan pada terjemahannya dalam bahasa target, menyisakan proporsi yang kecil (`r pull(filter(rs_target_profile_eng_idn, English == "TARGET_mentioned", Lemma == "ROB", Indonesian == "TARGET_not_mentioned"), perc)`%) untuk tidak dimunculkannya peran Target pada bahasa target. Ketimpangan distribusi ini sangat signifikan secara statistik (*p*~Binomial~ `r if (rob_target_profile_eng_idn_binom$p.value < 0.001) {"< 0.001"} else if (rob_target_profile_eng_idn_binom$p.value < 0.01 & rob_target_profile_eng_idn_binom$p.value > 0.001) {"< 0.01"} else if (rob_target_profile_eng_idn_binom$p.value < 0.05 & rob_target_profile_eng_idn_binom$p.value > 0.01) {"< 0.05"}`). 
+
+Selanjutnya, perhatikan distribusi ke(tidak)munculan eksplisit peran Target untuk STEAL (panel sebelah kanan). STEAL memiliki distribusi yang hampir berimbang antara kemunculan (n = `r sum(pull(filter(rs_target_profile_eng_idn, Lemma == "STEAL", English == "TARGET_mentioned"), n))`) dan ketidakmunculan (n = `r sum(pull(filter(rs_target_profile_eng_idn, Lemma == "STEAL", English == "TARGET_not_mentioned"), n))`) peran Target pada bahasa sumber. Untuk kedua distribusi tersebut, derajat kesepadanan konstruksionalnya juga sangat tinggi: `r pull(filter(rs_target_profile_eng_idn, English == "TARGET_mentioned", Lemma == "STEAL", Indonesian == "TARGET_mentioned"), perc)`% dari kemunculan Target dari STEAL pada bahasa sumber dipertahankan pada bahasa target. Demikian halnya dengan ketidakmunculan peran Target dalam bahasa sumber, yang dipertahankan (yaitu, tidak dimunculkan pula) `r pull(filter(rs_target_profile_eng_idn, English == "TARGET_not_mentioned", Lemma == "STEAL", Indonesian == "TARGET_not_mentioned"), perc)`% dalam bahasa target. Secara statistik, distribusi tersebut bukanlah suatu kebetulan (atau sangat signifikan) (*p*~Fisher~~-Exact~ `r if (steal_target_profile_eng_idn_fye$p.value < 0.001) {"< 0.001"} else if (steal_target_profile_eng_idn_fye$p.value < 0.01 & steal_target_profile_eng_idn_fye$p.value > 0.001) {"< 0.01"} else if (steal_target_profile_eng_idn_fye$p.value < 0.05 & steal_target_profile_eng_idn_fye$p.value > 0.01) {"< 0.05"}`) dan berefek kuat ($\phi$ = `r round(steal_target_profile_eng_idn_phicoeff, 2)`)
+
+
+# Pembahasan Rumusan Masalah 3 {#pembahasan-rq-3}
+
+- Kesepadanan Konstruksional - tipe konstruksi <span style="font-variant:small-caps;">rob</span> dan <span style="font-variant:small-caps;">steal</span> pada bahasa sumber dan padanannya pada bahasa target
+
+## Analisis
+
+Bagian ini membahas tipe konstruksi dari pemakaian ROB dan STEAL dalam bahasa Inggris dan tipe konstruksi pada bahasa target, yaitu bahasa Indonesia. Konstruksi yang difokuskan pada bahasa Inggris adalah pemetaan peran partisipan Target dan Barang dari ROB dan STEAL pada fungsi sintaksis (utamanya objek untuk kalimat aktif dan subjek untuk kalimat pasif dari ROB dan STEAL). Kedua peran ini dijadikan pusat perhatian mengingat bahwa keduanya memiliki distribusi berbeda terkait fungsinya sebagai argumen inti (objek) dari ROB dan STEAL (perhatikan [Gambar \@ref(fig:plot-profiled-participants-ENG-all-idn-lang)](#plot-profiled-participants-ENG-all-idn-lang)): peran Target lebih dominan ditonjolkan/direalisasikan oleh ROB sedangkan peran Barang lebih dominan ditonjolkan/direalisasikan oleh STEAL (perhatikan juga diagram asosiasi pada [Gambar \@ref(fig:plot-profiled-participants-ENG-all-assocplot-notebook)](#plot-profiled-participants-ENG-all-assocplot-notebook)).
+
+```{r count-of-construction-patterns-for-each-lang-and-each-verb}
+## count of constructional patterns for ROB======
+rob_cxn_eng <- rob1 %>% 
+  count(CXN_ENG, sort = TRUE, name = "N_CXN_ENG") %>% 
+  mutate(CXN_ENG = str_replace(CXN_ENG, "GOODS", "BARANG")) %>% 
+  filter(!is.na(CXN_ENG))
+# rob2_CXN_ENG
+rob_cxn_idn <- rob1 %>% 
+  count(CXN_IDN, sort = TRUE, name = "N_CXN_IDN") %>% 
+  mutate(CXN_IDN = str_replace(CXN_IDN, "GOODS", "BARANG")) %>% 
+  filter(!is.na(CXN_IDN))
+# rob2_CXN_IDN
+
+rob_cxn <- rob1 %>% 
+  count(CXN_ENG, CXN_IDN, sort = TRUE, name = "a") %>% 
+  mutate(across(where(is.character), ~str_replace(., "GOODS", "BARANG"))) %>% 
+  mutate(CXN_ENG_lab = factor(CXN_ENG, levels = unique(CXN_ENG)),
+         CXN_IDN_col = factor(CXN_IDN, levels = unique(CXN_IDN)))
+
+## count of constructional patterns for STEAL======
+steal_cxn_eng <- steal1 %>% 
+  count(CXN_ENG, sort = TRUE, name = "N_CXN_ENG") %>% 
+  mutate(CXN_ENG = str_replace(CXN_ENG, "GOODS", "BARANG")) %>% 
+  filter(!is.na(CXN_ENG))
+# steal2_CXN_ENG
+steal_cxn_idn <- steal1 %>% 
+  count(CXN_IDN, sort = TRUE, name = "N_CXN_IDN") %>% 
+  mutate(CXN_IDN = str_replace(CXN_IDN, "GOODS", "BARANG")) %>% 
+  filter(!is.na(CXN_IDN))
+# steal2_CXN_IDN
+
+steal_cxn <- steal1 %>% 
+  count(CXN_ENG, CXN_IDN, sort = TRUE, name = "a") %>% 
+  mutate(across(where(is.character), ~str_replace(., "GOODS", "BARANG"))) %>% 
+  mutate(CXN_ENG_lab = factor(CXN_ENG, levels = unique(CXN_ENG)),
+         CXN_IDN_col = factor(CXN_IDN, levels = unique(CXN_IDN)))
+
+brew_paired <- brewer.pal(brewer.pal.info[rownames(brewer.pal.info) == "Paired", 1], "Paired")
+cxn_idn <- unique(c(rob_cxn$CXN_IDN, steal_cxn$CXN_IDN))
+brew_paired_selected <- brew_paired[c(2, 1, 6, 7, 3, 5)]
+names(brew_paired_selected) <- cxn_idn
+cxn_idn_colours <- brew_paired_selected
+
+```
+
+
+### Pembahasan 1 - untuk ROB
+
+Selanjutnya, [Gambar \@ref(fig:cxn-plot-ROB)](#cxn-plot-ROB) berikut ini menampilkan tipe konstruksi untuk ROB terkait pemetaan peran Target dan Barang.
+
+
+```{r cxn-plot-ROB, fig.cap = "Distribusi padanan bahasa Indonesia konstruksi verba ROB", fig.asp = 0.718, fig.width = 7.85}
+fye_compute <- function(a, b, c, d, alt) {
+  return(fisher.test(matrix(c(a, b, c, d), nrow = 2), alternative = alt)$p.value)
+}
+oddsratio <- function(a, b, c, d, alt) {
+  return(fisher.test(matrix(c(a, b, c, d), nrow = 2), alternative = alt)$estimate)
+}
+
+p1_rob_cxn_idn <- rob_cxn %>% 
+  ggplot(aes(x = CXN_ENG_lab, y = a, fill = CXN_IDN_col)) + 
+  geom_col(position = position_dodge(.9)) +
+  geom_text(aes(label = a), 
+            position = position_dodge(.9), 
+            vjust = -.5,
+            size = 4) +
+  labs(x = "Konstruksi Sumber (bahasa Inggris)",
+       # title = "Distribusi padanan konstruksi ROB dalam bahasa Indonesia",
+       y = "Frekuensi pengamatan",
+       fill = "Konstruksi Target\n(bahasa Indonesia)") +
+  theme_light() +
+  theme(axis.text = element_text(size = 9.75),
+        axis.title = element_text(size = 14),
+        legend.text = element_text(size = 9.75),
+        legend.title = element_text(size = 14),
+        plot.title = element_text(size = 15)) +
+  scale_fill_manual(values = cxn_idn_colours)
+
+p1_rob_cxn_idn
+
+# ggsave("figs/plot-cxn-equivalence-ROB-idn.png", plot = p1_rob_cxn_idn, height = 6, width = 8, dpi = 300)
+  
+```
+
+```{r cxn-fye-ROB}
+## FYE computation=======
+rob_cxn_fye <- rob_cxn %>% 
+  left_join(rob_cxn_eng, by = "CXN_ENG") %>% 
+  left_join(rob_cxn_idn, by = "CXN_IDN") %>% 
+  mutate(perc = (a/N_CXN_ENG) * 100,
+         SUM = sum(a),
+         b = N_CXN_ENG - a,
+         c = N_CXN_IDN - a,
+         d = SUM - (a + b + c),
+         a_exp = (N_CXN_ENG * N_CXN_IDN)/SUM,
+         assoc = if_else(a > a_exp, "attraction", "repulsion"),
+         alt = if_else(a > a_exp, "greater", "less"),
+         # pfye = pmap_dbl(list(a, a_exp, b, c, d), fye_compute),
+         pfye = pmap_dbl(list(a, b, c, d, alt), fye_compute),
+         collstr = if_else(alt == "greater", -log10(pfye), log10(pfye)),
+         pholm = p.adjust(pfye, method = "holm"),
+         signif_fye = if_else(pfye < 0.05, TRUE, FALSE),
+         signif_holm = if_else(pholm < 0.05, TRUE, FALSE),
+         signif_holm_dec = if_else(pholm < 0.05, "*", "ns"),
+         signif_holm_dec = if_else(pholm < 0.01, "**", signif_holm_dec),
+         signif_holm_dec = if_else(pholm < 0.001, "***", signif_holm_dec),
+         odds_ratio = pmap_dbl(list(a, b, c, d, alt), oddsratio))
+rob_cxn_fye_short <- rob_cxn_fye %>% 
+  select(-N_CXN_ENG, -N_CXN_IDN, -SUM, -b, -c, -d, -a_exp, -alt, -signif_fye, -signif_holm) %>% 
+  arrange(desc(collstr))
+rob_cxn_fye_significant <- rob_cxn_fye_short %>% 
+  filter(signif_holm_dec != "ns")
+```
+
+
+Contoh cara memahami diagram batang di atas adalah sebagai berikut. Konstruksi BIng untuk <span style="font-variant:small-caps;">rob</span>, di mana partisipan T<span style="font-variant:small-caps;">arget</span> menempati fungsi Objek (yaitu konstruksi <span style="font-variant:small-caps;">target-obj</span>), bisa diterjemahkan ke dalam lima tipe konstruksi dalam padanan BI-nya; konstruksi padanannya adalah (i) <span style="font-variant:small-caps;">target-obj</span> (N=`r pull(filter(rob_cxn, CXN_ENG=='TARGET-OBJ', CXN_IDN=='TARGET-OBJ'), a)`) (lihat contoh XXX); (ii) <span style="font-variant:small-caps;">target-subj-pass</span> (N=`r pull(filter(rob_cxn, CXN_ENG=='TARGET-OBJ', CXN_IDN=='TARGET-SUBJ-PASS'), a)`); (iii) <span style="font-variant:small-caps;">barang-obj</span> (N=`r pull(filter(rob_cxn, CXN_ENG=='TARGET-OBJ', CXN_IDN=='BARANG-OBJ'), a)`); (iv) <span style="font-variant:small-caps;">intr(ansitif)</span> (N=`r pull(filter(rob_cxn, CXN_ENG=='TARGET-OBJ', CXN_IDN=='INTR'), a)`); dan (v) <span style="font-variant:small-caps;">nom(inal)-mod(ifier)</span> (N=`r pull(filter(rob_cxn, CXN_ENG=='TARGET-OBJ', CXN_IDN=='NOM-MODIFIER'), a)`). Dapat diperhatikan dalam Gambar XXX, bahwa konstruksi bahasa sumber (BIng) <span style="font-variant:small-caps;">target-obj</span> secara dominan dipertahankan dalam bahasa sasaran (BI) dibandingkan empat konstruksi lainnya. Hal ini mengindikasikan tingginya kesepadanan konstruksional <span style="font-variant:small-caps;">rob</span> ketika partisipan T<span style="font-variant:small-caps;">arget</span> muncul sebagai Objek. Kesepadanan konstruksi BIng <span style="font-variant:small-caps;">target-obj</span> dan BI <span style="font-variant:small-caps;">target-obj</span> sangat signifikan secara statistik (*p*~Holm's~ ~corrected~`r if (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-OBJ', CXN_IDN=="TARGET-OBJ"), pholm) < 0.001) {" < 0.001"} else if (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-OBJ', CXN_IDN=="TARGET-OBJ"), pholm) < 0.01 & (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-OBJ', CXN_IDN=="TARGET-OBJ"), pholm) > 0.001))  {" < 0.01"} else if (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-OBJ', CXN_IDN=="TARGET-OBJ"), pholm) < 0.05 & (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-OBJ', CXN_IDN=="TARGET-OBJ"), pholm) > 0.01))  {" < 0.05"}`).
+
+Selanjutnya, kesepadanan konstruksional yang lain ditunjukkan oleh <span style="font-variant:small-caps;">rob</span> dari perspektif berbeda, yaitu dalam kalimat pasif ketika partisipan T<span style="font-variant:small-caps;">arget</span> berfungsi sebagai Subjek kalimat (yaitu konstruksi <span style="font-variant:small-caps;">target-subj-pass</span>) (lihat contoh XXX). Dari Gambar XXX, dapat diamati bahwa konstruksi BIng <span style="font-variant:small-caps;">target-subj-pass</span> selalu diterjemahkan dalam konstruksi yang sama dalam BI. Kesesuaian ini sangat signifikan secara statistik (*p*~Holm's~ ~corrected~`r if (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-SUBJ-PASS', CXN_IDN=="TARGET-SUBJ-PASS"), pholm) < 0.001) {" < 0.001"} else if (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-SUBJ-PASS', CXN_IDN=="TARGET-SUBJ-PASS"), pholm) < 0.01 & (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-SUBJ-PASS', CXN_IDN=="TARGET-SUBJ-PASS"), pholm) > 0.001))  {" < 0.01"} else if (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-SUBJ-PASS', CXN_IDN=="TARGET-SUBJ-PASS"), pholm) < 0.05 & (pull(filter(rob_cxn_fye_significant, CXN_ENG=='TARGET-SUBJ-PASS', CXN_IDN=="TARGET-SUBJ-PASS"), pholm) > 0.01))  {" < 0.05"}`).
+
+### Pembahasan 2 - untuk STEAL
+
+[Gambar \@ref(fig:cxn-plot-STEAL)](#cxn-plot-STEAL) menunjukkan (i) tipe konstruksi untuk <span style="font-variant:small-caps;">steal</span> dalam BIng (aksis horizontal/aksis-*x*) terkait fungsi sintaksis kemunculan partisipan T<span style="font-variant:small-caps;">arget</span> dan B<span style="font-variant:small-caps;">arang</span>, dan (ii) distribusi/frekuensi pengamatan padanan konstruksi tersebut dalam BI (aksis vertikal/aksis-*y* dan legenda warna diagram batangnya).
+
+```{r cxn-plot-STEAL, fig.asp = 0.718, fig.cap = "Distribusi padanan bahasa Indonesian konstruksi verba STEAL"}
+fye_compute <- function(a, b, c, d, alt) {
+  return(fisher.test(matrix(c(a, b, c, d), nrow = 2), alternative = alt)$p.value)
+}
+oddsratio <- function(a, b, c, d, alt) {
+  return(fisher.test(matrix(c(a, b, c, d), nrow = 2), alternative = alt)$estimate)
+}
+
+p1_steal_cxn_idn <- steal_cxn %>% 
+  ggplot(aes(x = CXN_ENG_lab, y = a, fill = CXN_IDN_col)) + 
+  geom_col(position = position_dodge(.9)) +
+  geom_text(aes(label = a), 
+            position = position_dodge(.9), 
+            vjust = -.5,
+            size = 4) +
+  labs(x = "Konstruksi Sumber (bahasa Inggris)",
+       # title = "Distribusi padanan konstruksi STEAL dalam bahasa Indonesia",
+       y = "Frekuensi pengamatan",
+       fill = "Konstruksi Target\n(bahasa Indonesia)") +
+  theme_light() +
+  theme(axis.text = element_text(size = 9.75),
+        axis.title = element_text(size = 14),
+        legend.text = element_text(size = 9.75),
+        legend.title = element_text(size = 14),
+        plot.title = element_text(size = 15)) +
+  scale_fill_manual(values = cxn_idn_colours)
+
+p1_steal_cxn_idn
+
+# ggsave("figs/plot-cxn-equivalence-STEAL-idn.png", plot = p1_steal_cxn_idn, height = 6, width = 8, dpi = 300)
+  
+```
+
+Dibandingkan dengan <span style="font-variant:small-caps;">rob</span>, lema <span style="font-variant:small-caps;">steal</span> memiliki profil konstruksional berbeda, dalam hal ini, secara dominan memetakan partisipan B<span style="font-variant:small-caps;">arang</span> sebagai Objek (perhatikan perbedaan warna diagram batangnya). Sebaliknya, lema <span style="font-variant:small-caps;">rob</span> secara dominan memetakan partisipan T<span style="font-variant:small-caps;">arget</span> sebagai Objek. Variasi tipe konstruksi ini secara teoretis telah diajukan dalam literatur terkait hal yang membedakan lema verbal sinonim seperti <span style="font-variant:small-caps;">rob</span> dan <span style="font-variant:small-caps;">steal</span> (CITATION TO GOLDBERG). Temuan ini juga terkait dengan pembahasan pada §[\@ref(profile-participant-RS)](#profile-participant-RS) dan [Gambar \@ref(fig:plot-profiled-participants-ENG-all-assocplot-notebook)](#plot-profiled-participants-ENG-all-assocplot-notebook) yang menunjukkan lebih tingginya penonjolan partisipan T<span style="font-variant:small-caps;">arget</span> untuk <span style="font-variant:small-caps;">rob</span>, dan partisipan B<span style="font-variant:small-caps;">arang</span> untuk <span style="font-variant:small-caps;">steal</span>.
+
+
+```{r cxn-fye-STEAL}
+## FYE computation=======
+steal_cxn_fye <- steal_cxn %>% 
+  left_join(steal_cxn_eng, by = "CXN_ENG") %>% 
+  left_join(steal_cxn_idn, by = "CXN_IDN") %>% 
+  mutate(perc = (a/N_CXN_ENG) * 100,
+         SUM = sum(a),
+         b = N_CXN_ENG - a,
+         c = N_CXN_IDN - a,
+         d = SUM - (a + b + c),
+         a_exp = (N_CXN_ENG * N_CXN_IDN)/SUM,
+         assoc = if_else(a > a_exp, "attraction", "repulsion"),
+         alt = if_else(a > a_exp, "greater", "less"),
+         # pfye = pmap_dbl(list(a, a_exp, b, c, d), fye_compute),
+         pfye = pmap_dbl(list(a, b, c, d, alt), fye_compute),
+         collstr = if_else(alt == "greater", -log10(pfye), log10(pfye)),
+         pholm = p.adjust(pfye, method = "holm"),
+         signif_fye = if_else(pfye < 0.05, TRUE, FALSE),
+         signif_holm = if_else(pholm < 0.05, TRUE, FALSE),
+         signif_holm_dec = if_else(pholm < 0.05, "*", "ns"),
+         signif_holm_dec = if_else(pholm < 0.01, "**", signif_holm_dec),
+         signif_holm_dec = if_else(pholm < 0.001, "***", signif_holm_dec),
+         odds_ratio = pmap_dbl(list(a, b, c, d, alt), oddsratio))
+steal_cxn_fye_short <- steal_cxn_fye %>% 
+  select(-N_CXN_ENG, -N_CXN_IDN, -SUM, -b, -c, -d, -a_exp, -alt, -signif_fye, -signif_holm) %>% 
+  arrange(desc(collstr))
+steal_cxn_fye_significant <- steal_cxn_fye_short %>% 
+  filter(signif_holm_dec != "ns")
+```
+
+
+Cara menginterpretasikan informasi kuantitatif pada [Gambar \@ref(fig:cxn-plot-STEAL)](#cxn-plot-STEAL) sama dengan data untuk <span style="font-variant:small-caps;">rob</span> sebelumnya. Tipe konstruksi dominan untuk <span style="font-variant:small-caps;">steal</span> dalam BIng, yaitu <span style="font-variant:small-caps;">barang-objek</span> (N~konstruksi~=`r sum(filter(steal_cxn, CXN_ENG=="BARANG-OBJ")$a)`), secara signifikan dipertahankan pada padanan BI-nya (contoh (@barangobj-ing-idn)) sebanyak `r pull(filter(mutate(filter(steal_cxn, CXN_ENG=="BARANG-OBJ"), perc = a/sum(a) * 100), perc == max(perc)), perc)`% dari total kemunculan konstruksi <span style="font-variant:small-caps;">barang-objek</span> dalam BIng (*p*~Holm's~ ~corrected~`r if (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-OBJ', CXN_IDN=="BARANG-OBJ"), pholm) < 0.001) {" < 0.001"} else if (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-OBJ', CXN_IDN=="BARANG-OBJ"), pholm) < 0.01 & (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-OBJ', CXN_IDN=="BARANG-OBJ"), pholm) > 0.001))  {" < 0.01"} else if (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-OBJ', CXN_IDN=="BARANG-OBJ"), pholm) < 0.05 & (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-OBJ', CXN_IDN=="BARANG-OBJ"), pholm) > 0.01))  {" < 0.05"}`). Variasi lainnya adalah perubahan konstruksional untuk <span style="font-variant:small-caps;">barang-objek</span> dalam BIng menjadi konstruksi <span style="font-variant:small-caps;">barang-subj-pass</span> (@barangobj-ing-barang-subj-idn) (N=`r pull(filter(mutate(filter(steal_cxn, CXN_ENG=="BARANG-OBJ"), perc = a/sum(a) * 100), CXN_IDN == "BARANG-SUBJ-PASS"), a)`) dan <span style="font-variant:small-caps;">intr(ansitif)</span> (@barangobj-ing-intr-idn) (N=`r pull(filter(mutate(filter(steal_cxn, CXN_ENG=="BARANG-OBJ"), perc = a/sum(a) * 100), CXN_IDN == "INTR"), a)`) dalam BI.
+
+(@barangobj-ing-idn) barang-objek BIng & BI
+(@barangobj-ing-barang-subj-idn) barang objek BIng & barang-subj-pass BI
+(@barangobj-ing-intr-idn) barang objek BIng & intransitive BI
+
+Varian konstruksi pasif untuk <span style="font-variant:small-caps;">barang-objek</span>, yaitu <span style="font-variant:small-caps;">barang-subj-pass</span>, juga secara relatif memiliki kesepadanan konstruksional yang tinggi dalam BI. Dari total `r sum(mutate(filter(steal_cxn, CXN_ENG=="BARANG-SUBJ-PASS"), perc = a/sum(a) * 100)$a)` kemunculan lema <span style="font-variant:small-caps;">steal</span> dalam konstruksi <span style="font-variant:small-caps;">barang-subj-pass</span>, `r pull(filter(mutate(filter(steal_cxn, CXN_ENG=="BARANG-SUBJ-PASS"), perc = a/sum(a) * 100), CXN_IDN=="BARANG-SUBJ-PASS"), perc)`% padanan BI-nya secara sangat signifikan mempertahankan konstruksi tersebut (*p*~Holm's~ ~corrected~`r if (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-SUBJ-PASS', CXN_IDN=="BARANG-SUBJ-PASS"), pholm) < 0.001) {" < 0.001"} else if (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-SUBJ-PASS', CXN_IDN=="BARANG-SUBJ-PASS"), pholm) < 0.01 & (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-SUBJ-PASS', CXN_IDN=="BARANG-SUBJ-PASS"), pholm) > 0.001))  {" < 0.01"} else if (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-SUBJ-PASS', CXN_IDN=="BARANG-SUBJ-PASS"), pholm) < 0.05 & (pull(filter(steal_cxn_fye_significant, CXN_ENG=='BARANG-SUBJ-PASS', CXN_IDN=="BARANG-SUBJ-PASS"), pholm) > 0.01))  {" < 0.05"}`).
+
+
+# Simpulan
+
+# Daftar acuan {-}
