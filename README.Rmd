@@ -26,6 +26,8 @@ Jika berkas-berkas dalam repositori ini [@rajeg_material_2021] digunakan untuk t
 
 > Rajeg, Gede Primahadi Wijaya, I Made Rajeg, Putu Dea Indah Kartini & I Gede Semara Dharma Putra. 2021. Material pendukung untuk *MODEL KAJIAN TERJEMAHAN BERBASIS BANK DATA TERJEMAHAN DIGITAL INGGRIS-INDONESIA DAN IMPLIKASI PEDAGOGISNYA*. Open Science Framework. https://doi.org/10.17605/OSF.IO/Y6ESA. https://osf.io/y6esa/.
 
+Luaran utama dari penelitian ini, yaitu artikel jurnal, saat ini sedang dalam proses peninjauan sejawat (*peer review*), dan repositori pendukung artikel tersebut dapat diakses melalui [tautan berikut](https://github.com/gederajeg/constructional-equivalence) [@Rajeg_Constructional_equivalence_in_2021].
+
 # Material
 
 - Direktori [SENASTEK](https://github.com/gederajeg/rob-steal-parallel-corpora/tree/main/SENASTEK) berisi berkas pendukung untuk makalah yang disajikan pada [*Seminar Nasional Sains, Teknologi dan Humaniora*](https://senastek.unud.ac.id) 2021 (SENASTEK 2021). Berkas-berkas tersebut berupa data mentah, [kode pemrograman R](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-code.R) untuk analisis kuantitatif dan visualisasi, [salindia/slides](https://doi.org/10.6084/m9.figshare.17078369) dan [abstrak](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/SENASTEK/SENASTEK-abstrak.pdf) presentasi [@rajeg_pemanfaatan_2021], dan dua grafik statistik yang digunakan dalam presentasi.

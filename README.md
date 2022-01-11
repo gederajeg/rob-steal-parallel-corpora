@@ -36,6 +36,12 @@ pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
 > IMPLIKASI PEDAGOGISNYA*. Open Science Framework.
 > <https://doi.org/10.17605/OSF.IO/Y6ESA>. <https://osf.io/y6esa/>.
 
+Luaran utama dari penelitian ini, yaitu artikel jurnal, saat ini sedang
+dalam proses peninjauan sejawat (*peer review*), dan repositori
+pendukung artikel tersebut dapat diakses melalui [tautan
+berikut](https://github.com/gederajeg/constructional-equivalence)
+([Rajeg 2021b](#ref-Rajeg_Constructional_equivalence_in_2021)).
+
 # Material
 
 -   Direktori
@@ -74,7 +80,7 @@ pengajaran, harap menyitir/mengutip repositori ini sebagai berikut:
     dalam fungsi `para_conc()` yang diterbitkan bersama dengan modul
     pemrograman R bernama
     [**paracorp**](https://gederajeg.github.io/paracorp/) ([Rajeg
-    2021](#ref-rajeg_paracorp_2021)). Perhatikan salah satu contoh
+    2021a](#ref-rajeg_paracorp_2021)). Perhatikan salah satu contoh
     penggunaan `para_conc()` berikut. Info lengkap cara memasang dan
     mengutip modul **paracorp** dalam publikasi dapat dilihat pada laman
     [**paracorp**](https://gederajeg.github.io/paracorp/).
@@ -103,11 +109,11 @@ head(my_para_conc)
 #>   LEFT                   NODE   RIGHT                 TRANSLATION               
 #>   <chr>                  <chr>  <chr>                 <chr>                     
 #> 1 This enzyme should cr… should also react to the ho… "Enzim ini tentunya menja…
-#> 2 When designating thes… should always be borne in m… "Ketika menentukan filum …
-#> 3 You                    should be able to control n… "Anda seharusnya dapat me…
-#> 4 It                     should be admitted that ini… "Perlu diakui bahwa untuk…
-#> 5 This was doubly ironi… should be denigrated rather… "Hal ini sangat ironis, k…
-#> 6 The electric resulted… should be directly distribu… "Listrik yang dihasilkan …
+#> 2 You                    should be able to control n… "Anda seharusnya dapat me…
+#> 3 The process            should be carried by the do… "Proses tersebut harus di…
+#> 4 Since electric cannot… should be continuously dist… "Karena listrik tidak dap…
+#> 5 To reach that, a cond… should be created, either i… "Untuk menggapainya, haru…
+#> 6 It is an expression o… should be equipped with suc… "Ini merupakan bukti kese…
 ```
 
 # Sesi ruang kerja R
@@ -124,7 +130,7 @@ devtools::session_info()
 #>  collate  en_US.UTF-8
 #>  ctype    en_US.UTF-8
 #>  tz       Asia/Makassar
-#>  date     2022-01-09
+#>  date     2022-01-11
 #>  pandoc   2.14.0.3 @ /Applications/RStudio.app/Contents/MacOS/pandoc/ (via rmarkdown)
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
@@ -207,10 +213,21 @@ Association (ELRA).
 
 <div id="ref-rajeg_paracorp_2021" class="csl-entry">
 
-Rajeg, Gede Primahadi Wijaya. 2021. *Paracorp: A concordancer for
+Rajeg, Gede Primahadi Wijaya. 2021a. *Paracorp: A concordancer for
 parallel, bilingual corpora*. GitHub; Open Science Framework (OSF).
 doi:[10.17605/OSF.IO/HV9CU](https://doi.org/10.17605/OSF.IO/HV9CU).
 <https://github.com/gederajeg/paracorp>.
+
+</div>
+
+<div id="ref-Rajeg_Constructional_equivalence_in_2021"
+class="csl-entry">
+
+Rajeg, Gede Primahadi Wijaya. 2021b. *<span
+class="nocase">Constructional equivalence in the Indonesian translations
+of ROB and STEAL</span>*.
+doi:[10.17605/OSF.IO/PZC8Y](https://doi.org/10.17605/OSF.IO/PZC8Y).
+<https://github.com/gederajeg/constructional-equivalence>.
 
 </div>
 
