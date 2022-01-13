@@ -76,6 +76,14 @@ berikut](https://github.com/gederajeg/constructional-equivalence)
     terpisah, yang kemudian bisa menjadi input untuk konkordansi paralel
     (lihat info selanjutnya).
 
+-   Berkas bernama `ROB_sample_conc_main.tsv` dan
+    `STEAL_sample_conc_main.tsv` adalah data utama penelitian ini.
+    Berkas ini berupa sampel konkordansi lema ROB dan STEAL beserta
+    terjemahan bahasa Indonesianya yang telah dianotasi berdasarkan
+    variabel-variabel kualitatif (leksikal, morfosintaksis, semantik,
+    dan konstruksional) sesuai dengan tujuan dan rumusan masalah
+    penelitian.
+
 -   Program untuk menghasilkan konkordansi paralel menggunakan R dikemas
     dalam fungsi `para_conc()` yang diterbitkan bersama dengan modul
     pemrograman R bernama
@@ -109,11 +117,11 @@ head(my_para_conc)
 #>   LEFT                   NODE   RIGHT                 TRANSLATION               
 #>   <chr>                  <chr>  <chr>                 <chr>                     
 #> 1 This enzyme should cr… should also react to the ho… "Enzim ini tentunya menja…
-#> 2 You                    should be able to control n… "Anda seharusnya dapat me…
-#> 3 The process            should be carried by the do… "Proses tersebut harus di…
-#> 4 Since electric cannot… should be continuously dist… "Karena listrik tidak dap…
-#> 5 To reach that, a cond… should be created, either i… "Untuk menggapainya, haru…
-#> 6 It is an expression o… should be equipped with suc… "Ini merupakan bukti kese…
+#> 2 When designating thes… should always be borne in m… "Ketika menentukan filum …
+#> 3 You                    should be able to control n… "Anda seharusnya dapat me…
+#> 4 The impression of dis… should be changed            "Kesan menjijikan dan sim…
+#> 5 The huge world popula… should be fast accomplished. "Jumlah penduduk dunia ya…
+#> 6 The government         should be more proactive in… "Hendaknya pemerintah leb…
 ```
 
 # Sesi ruang kerja R
@@ -130,7 +138,7 @@ devtools::session_info()
 #>  collate  en_US.UTF-8
 #>  ctype    en_US.UTF-8
 #>  tz       Asia/Makassar
-#>  date     2022-01-11
+#>  date     2022-01-13
 #>  pandoc   2.14.0.3 @ /Applications/RStudio.app/Contents/MacOS/pandoc/ (via rmarkdown)
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
