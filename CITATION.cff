@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use materials and data from this repository, please cite them as below."
+authors:
+  - family-names: Rajeg
+    given-names: Gede Primahadi Wijaya
+    orcid: https://orcid.org/0000-0002-2047-8621
+  - family-names: Rajeg
+    given-names: I Made
+  - family-names: Kartini
+    given-names: Putu Dea Indah
+  - family-names: Putra
+    given-names: I Gede Semara Dharma
+title: "Repositori data dan kode pemrograman untuk Penelitian Unggulan Program Studi (PUPS) dengan judul MODEL KAJIAN TERJEMAHAN BERBASIS BANK DATA TERJEMAHAN DIGITAL INGGRIS-INDONESIA DAN IMPLIKASI PEDAGOGISNYA"
+version: 0.0.1
+doi: 10.17605/OSF.IO/Y6ESA
+date-released: 2021-12-10
+license: CC-BY-NC-SA
+repository-code: "https://github.com/gederajeg/rob-steal-parallel-corpora"
