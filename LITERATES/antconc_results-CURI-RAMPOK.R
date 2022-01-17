@@ -1,7 +1,7 @@
 library(tidyverse)
 library(readxl)
-rob2 <- readr::read_rds("/Users/Primahadi/Documents/research/2020-11-03-PARALLEL-CORPUS-PUPS/rob2.rds")
-steal2 <- readr::read_rds("/Users/Primahadi/Documents/research/2020-11-03-PARALLEL-CORPUS-PUPS/steal2.rds")
+rob2 <- readr::read_rds("../rob2.rds")
+steal2 <- readr::read_rds("../steal2.rds")
 
 # count the construction pattern of RAMPOK (ROB's translation) as verb
 rampok_idn_cxn <- rob2 %>% 
@@ -72,7 +72,7 @@ vcd::assocstats(parallel_mtx_av)$cramer # phi-coefficient effect size is the sam
 # ====================== # End of the parallel data codes
 	
 # read the AntConc concordance data for RAMPOK and CURI from the Monolingual corpora
-antconc_data <- readxl::read_xlsx("/Users/Primahadi/Documents/research/2021-10-17-ROBSTEAL-IDN/antconc_results-CURI-RAMPOK.xlsx")
+antconc_data <- readxl::read_xlsx("antconc_results-CURI-RAMPOK.xlsx", sheet = 1)
 
 # potential translated novel
 excluded_novels <- c("Musashi_Eiji_Yoshikawa_INDONESIA_Tamat.txt", "MULAN.txt")
