@@ -112,11 +112,12 @@ antconc_mtx_av_prop <- prop.table(antconc_mtx_av, margin = 2)
 barplot(antconc_mtx_av_prop, 
         legend.text = TRUE, 
         xlim = c(0, 3.175), 
-        args.legend = list(bty = "n", border = "gray95"), 
+        args.legend = list(bty = "n", border = "gray95", x = 3.5), 
         ylab = "Proportion", 
         xlab = "Verbs", 
         col = c("grey20", "gray90", "grey20", "gray90"), 
-        border = "gray95")
+        border = "gray95", 
+        main = "Proportion of construction types by verbs")
 
 vcd::assocstats(antconc_mtx_av)
 fisher.test(antconc_mtx_av)
