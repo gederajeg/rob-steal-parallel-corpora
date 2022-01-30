@@ -78,12 +78,13 @@ berikut](https://github.com/gederajeg/constructional-equivalence)
 
 -   Berkas bernama
     [`ROB_sample_conc_main.tsv`](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/ROB_sample_conc_main.tsv)
-    dan `STEAL_sample_conc_main.tsv` adalah data utama penelitian ini.
-    Berkas ini berupa sampel konkordansi lema ROB dan STEAL beserta
-    terjemahan bahasa Indonesianya yang telah dianotasi berdasarkan
-    variabel-variabel kualitatif (leksikal, morfosintaksis, semantik,
-    dan konstruksional) sesuai dengan tujuan dan rumusan masalah
-    penelitian.
+    dan
+    [`STEAL_sample_conc_main.tsv`](https://github.com/gederajeg/rob-steal-parallel-corpora/blob/main/STEAL_sample_conc_main.tsv)
+    adalah data utama penelitian ini. Berkas ini berupa sampel
+    konkordansi lema ROB dan STEAL beserta terjemahan bahasa
+    Indonesianya yang telah dianotasi berdasarkan variabel-variabel
+    kualitatif (leksikal, morfosintaksis, semantik, dan konstruksional)
+    sesuai dengan tujuan dan rumusan masalah penelitian.
 
 -   Program untuk menghasilkan konkordansi paralel menggunakan R dikemas
     dalam fungsi `para_conc()` yang diterbitkan bersama dengan modul
@@ -115,14 +116,14 @@ my_para_conc <- para_conc(source_text = sci_en,
 # peek into the results as tibble/data frame
 head(my_para_conc)
 #> # A tibble: 6 × 4
-#>   LEFT                   NODE   RIGHT                 TRANSLATION               
-#>   <chr>                  <chr>  <chr>                 <chr>                     
-#> 1 When designating thes… should always be borne in m… "Ketika menentukan filum …
-#> 2 You                    should be able to control n… "Anda seharusnya dapat me…
-#> 3 Therefore, the will t… should be able to foresee t… "Oleh karena itu, kehenda…
-#> 4 The minor improvement… should be as readily preser… "Perubahan kecil dari gen…
-#> 5 To reach that, a cond… should be created, either i… "Untuk menggapainya, haru…
-#> 6 It is an expression o… should be equipped with suc… "Ini merupakan bukti kese…
+#>   LEFT                      NODE   RIGHT            TRANSLATION                 
+#>   <chr>                     <chr>  <chr>            <chr>                       
+#> 1 When designating these p… should always be borne… "Ketika menentukan filum ya…
+#> 2 The minor improvements i… should be as readily p… "Perubahan kecil dari gener…
+#> 3 The impression of disgus… should be changed       "Kesan menjijikan dan simbo…
+#> 4 It is an expression of t… should be equipped wit… "Ini merupakan bukti kesemp…
+#> 5 The fund for research an… should be increased ev… "Dana untuk penelitian dan …
+#> 6 Recently a chemist propo… should be named guacam… "Seorang kimiawan baru-baru…
 ```
 
 # Sesi ruang kerja R
@@ -139,7 +140,7 @@ devtools::session_info()
 #>  collate  en_US.UTF-8
 #>  ctype    en_US.UTF-8
 #>  tz       Asia/Makassar
-#>  date     2022-01-17
+#>  date     2022-01-30
 #>  pandoc   2.14.0.3 @ /Applications/RStudio.app/Contents/MacOS/pandoc/ (via rmarkdown)
 #> 
 #> ─ Packages ───────────────────────────────────────────────────────────────────
@@ -158,7 +159,7 @@ devtools::session_info()
 #>  dplyr         1.0.7   2021-06-18 [1] CRAN (R 4.1.0)
 #>  ellipsis      0.3.2   2021-04-29 [1] CRAN (R 4.1.0)
 #>  evaluate      0.14    2019-05-28 [1] CRAN (R 4.1.0)
-#>  fansi         0.5.0   2021-05-25 [1] CRAN (R 4.1.0)
+#>  fansi         1.0.2   2022-01-14 [1] CRAN (R 4.1.2)
 #>  fastmap       1.1.0   2021-01-25 [1] CRAN (R 4.1.0)
 #>  fs            1.5.2   2021-12-08 [1] CRAN (R 4.1.0)
 #>  generics      0.1.1   2021-10-25 [1] CRAN (R 4.1.0)
